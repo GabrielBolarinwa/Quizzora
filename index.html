@@ -218,20 +218,37 @@
               Questions
             </span>
           </div>
-          <div class="buttons" id="buttons">
-            <button
-              title="Previous Question"
-              class="previous button fa fa-chevron-left"
-              id="previous"
-              onclick="previousQuestion()"
-            ></button>
-            <button
-              title="Next Question"
-              class="next button fa fa-chevron-right"
-              id="next"
-              onclick="nextQuestion()"
-            ></button>
-          </div>
+
+          <section class="question-controls">
+            <div class="buttons" id="buttons">
+              <button
+                title="Previous Question"
+                class="previous button"
+                id="previous"
+                onclick="previousQuestion()"
+              >
+                <span class="button-big">Previous</span>
+                <span class="button-small fa fa-chevron-left"></span>
+              </button>
+
+              <div class="question-switch-buttons">
+                <button onclick="changeQuestion(0)">1</button
+                ><button onclick="changeQuestion(1)">2</button
+                ><button onclick="changeQuestion(2)">3</button
+                ><button onclick="changeQuestion(3)">4</button
+                ><button onclick="changeQuestion(4)">5</button>
+              </div>
+              <button
+                class="next button"
+                title="Next Question"
+                id="next"
+                onclick="nextQuestion()"
+              >
+                <span class="button-big">Next</span>
+                <span class="button-small fa fa-chevron-right"></span>
+              </button>
+            </div>
+          </section>
         </footer>
       </section>
       <section class="result_box" id="result">
@@ -252,6 +269,7 @@
         </div>
       </section>
     </main>
+
     <script src="js/script.js"></script>
   </body>
 </html>

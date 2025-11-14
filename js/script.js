@@ -54,7 +54,6 @@ function showQuiz() {
   let initialTime = new Date(100);
   let finalTime = new Date(180100);
   let timeDifference = finalTime - initialTime;
-  console.log(correctAnswers);
   setTimeout(function () {
     timerStart = setInterval(() => {
       timeDifference = timeDifference - 1000;
@@ -79,6 +78,14 @@ function initializeQuestionSwitch() {
   }
 }
 
+function changeQuestion(questionNumber) {
+  count = questionNumber;
+  currentNumber = questionNumber + 1;
+  indexNumber.textContent = currentNumber;
+  questionControl();
+  updateProgressBar();
+}
+
 function questionControl() {
   if (count === totalCount) {
     clearInterval(timerStart);
@@ -86,25 +93,22 @@ function questionControl() {
     showResult();
   }
   if (count === totalCount - 1) {
-    nextBtn.textContent = " End Quiz";
-    nextBtn.classList.replace("fa-chevron-right", "buttonEndMode");
+    nextBtn.textContent = "End Quiz";
   } else {
-    nextBtn.textContent = "";
-    nextBtn.classList.replace("buttonEndMode", "fa-chevron-right");
+    nextBtn.innerHTML = `<span class='button-big'>Next</span>
+    <span class='button-small fa fa-chevron-right'></span>`;
   }
   if (count === 1) {
-    prevBtn.style.display = "initial";
+    prevBtn.style.visibility = "visible";
   } else if (count === 0) {
-    prevBtn.style.display = "none";
+    prevBtn.style.visibility = "hidden";
   }
   questions.forEach((question) => {
     question.classList.remove("displayQuestion");
   });
-  try {
+  if (count !== totalCount) {
     questions[count].classList.add("displayQuestion");
     questions[count].classList.add("animate__slideInRight");
-  } catch (e) {
-    console.log(e);
   }
 }
 
@@ -115,7 +119,6 @@ function deselectOptions() {
 }
 
 function previousQuestion() {
-  console.log(correctAnswers);
   count--;
   currentNumber--;
   indexNumber.textContent = currentNumber;
@@ -151,47 +154,46 @@ function updateProgressBar() {
 }
 
 function messageBox() {
- var msg = "",
-  argNum = 0,
-  startPos,
-  endPos;
- var args = messageBox.arguments;
- var numArgs = args.length;
+  var msg = "",
+    argNum = 0,
+    startPos,
+    endPos;
+  var args = messageBox.arguments;
+  var numArgs = args.length;
 
- if (numArgs) {
-  var theStr = args[argNum++];
+  if (numArgs) {
+    var theStr = args[argNum++];
 
-  if (numArgs === 1 || theStr === "") {
-   msg = theStr;
-  } else {
+    if (numArgs === 1 || theStr === "") {
+      msg = theStr;
+    } else {
+      startPos = 0;
+      endPos = theStr.indexOf("%s", startPos);
 
-   startPos = 0;
-   endPos = theStr.indexOf("%s", startPos);
+      if (endPos === -1) {
+        startPos = theStr.length;
+      }
 
-   if (endPos === -1) {
-    startPos = theStr.length;
-   }
+      while (startPos < theStr.length) {
+        msg += theStr.substring(startPos, endPos);
 
-   while (startPos < theStr.length) {
-    msg += theStr.substring(startPos, endPos);
+        if (argNum < numArgs) {
+          msg += args[argNum++];
+        }
 
-    if (argNum < numArgs) {
-     msg += args[argNum++];
+        startPos = endPos + 2;
+        endPos = theStr.indexOf("%s", startPos);
+
+        if (endPos === -1) {
+          endPos = theStr.length;
+        }
+      }
+      if (!msg) {
+        msg = args[0];
+      }
     }
-
-    startPos = endPos + 2;
-    endPos = theStr.indexOf("%s", startPos);
-
-    if (endPos === -1) {
-     endPos = theStr.length;
-    }
-   }
-   if (!msg) {
-    msg = args[0];
-   }
   }
- } 
- return(msg);
+  return msg;
 }
 
 function showResult() {

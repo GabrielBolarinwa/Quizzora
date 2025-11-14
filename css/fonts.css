@@ -1,325 +1,325 @@
 @font-face {
-    font-family: Zarathrustra;
-    src: url("fonts/zarathustra-v01.otf");
-    font-display: swap;
+  font-family: Zarathrustra;
+  src: url("fonts/zarathustra-v01.otf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Longstanding;
-    src: url("fonts/Longstanding\ 400.otf");
-    font-display: swap;
+  font-family: Longstanding;
+  src: url("fonts/Longstanding\ 400.otf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Museo;
-    src: url("fonts/Museo300-Regular.otf");
-    font-weight: 300;
-    font-display: swap;
+  font-family: Museo;
+  src: url("fonts/Museo300-Regular.otf");
+  font-weight: 300;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Museo;
-    src: url("fonts/Museo700-Regular.otf");
-    font-weight: 700;
-    font-display: swap;
+  font-family: Museo;
+  src: url("fonts/Museo700-Regular.otf");
+  font-weight: 700;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Beanco;
-    src: url("fonts/Beanco\ Font.ttf");
-    font-weight: normal;
-    font-display: swap;
+  font-family: Beanco;
+  src: url("fonts/Beanco\ Font.ttf");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Encorpada;
-    src: url("fonts/Encorpada\ Classic\ 400.otf");
-    font-weight: normal;
-    font-display: swap;
+  font-family: Encorpada;
+  src: url("fonts/Encorpada\ Classic\ 400.otf");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Orbitron;
-    src: url('fonts/Orbitron-Regular.ttf');
-    font-diplay: swap;
+  font-family: Orbitron;
+  src: url("fonts/Orbitron-Regular.ttf");
+  font-diplay: swap;
 }
 
 @font-face {
-    font-family: Orbitron;
-    src: url('fonts/Orbitron-Bold.ttf');
-    font-weight: bold;
-    font-display: swap;
+  font-family: Orbitron;
+  src: url("fonts/Orbitron-Bold.ttf");
+  font-weight: bold;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Orbitron;
-    src: url('fonts/Orbitron-Medium.ttf');
-    font-weight: normal;
-    font-display: swap;
+  font-family: Orbitron;
+  src: url("fonts/Orbitron-Medium.ttf");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Orbitron;
-    src: url('fonts/Orbitron-ExtraBold.ttf');
-    font-weight: bolder;
-    font-display: swap;
+  font-family: Orbitron;
+  src: url("fonts/Orbitron-ExtraBold.ttf");
+  font-weight: bolder;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Orbitron;
-    src: url('fonts/Orbitron-SemiBold.ttf');
-    font-weight: 600;
-    font-display: swap;
+  font-family: Orbitron;
+  src: url("fonts/Orbitron-SemiBold.ttf");
+  font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-Regular.ttf');
-    font-weight: normal;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-Regular.ttf");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-Italic.ttf');
-    font-style: italic;
-    font-weight: normal;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-Italic.ttf");
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-Bold.ttf');
-    font-weight: bold;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-Bold.ttf");
+  font-weight: bold;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-BoldItalic.ttf');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-ExtraBold.ttf');
-    font-weight: 800;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-ExtraBold.ttf");
+  font-weight: 800;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-ExtraBoldItalic.ttf');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-ExtraBoldItalic.ttf");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-SemiBold.ttf');
-    font-weight: 600;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-SemiBold.ttf");
+  font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-SemiBoldItalic.ttf');
-    font-style: italic;
-    font-weight: 600;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-SemiBoldItalic.ttf");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-Light.ttf');
-    font-weight: light;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-Light.ttf");
+  font-weight: light;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-LightItalic.ttf');
-    font-style: italic;
-    font-weight: light;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-LightItalic.ttf");
+  font-style: italic;
+  font-weight: light;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-ExtraLight.ttf');
-    font-weight: 200;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-ExtraLight.ttf");
+  font-weight: 200;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-ExtraLightItalic.ttf');
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-ExtraLightItalic.ttf");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-Thin');
-    font-weight: 100;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-Thin");
+  font-weight: 100;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-ThinItalic.ttf');
-    font-weight: 100;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-ThinItalic.ttf");
+  font-weight: 100;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-Black.ttf');
-    font-weight: 900;
-    font-display: swap;
+  font-family: Poppins;
+  src: url("fonts/Poppins-Black.ttf");
+  font-weight: 900;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Poppins;
-    src: url('fonts/Poppins-BlackItalic');
-    font-weight: 900;
-    font-style: italic;
+  font-family: Poppins;
+  src: url("fonts/Poppins-BlackItalic");
+  font-weight: 900;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Regular.ttf');
-    font-weight: normal;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Regular.ttf");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Italic.ttf');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Italic.ttf");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Bold.ttf');
-    font-weight: bold;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Bold.ttf");
+  font-weight: bold;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-BoldItalic.ttf');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Black.ttf');
-    font-weight: 900;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Black.ttf");
+  font-weight: 900;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-BlackItalic.ttf');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-BlackItalic.ttf");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Light.ttf');
-    font-weight: light;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Light.ttf");
+  font-weight: light;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-LightItalic.ttf');
-    font-weight: light;
-    font-style: italic;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-LightItalic.ttf");
+  font-weight: light;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Medium.ttf');
-    font-weight: 500;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Medium.ttf");
+  font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-MediumItalic.ttf');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-MediumItalic.ttf");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-Thin.ttf');
-    font-weight: 100;
-    font-display: swap;
+  font-family: Roboto;
+  src: url("fonts/Roboto-Thin.ttf");
+  font-weight: 100;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url('fonts/Roboto-ThinItalic.ttf');
-    font-weight: 100;
-    font-display: swap;
-    font-style: italic;
+  font-family: Roboto;
+  src: url("fonts/Roboto-ThinItalic.ttf");
+  font-weight: 100;
+  font-display: swap;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: ScriptMT;
-    src: url('fonts/ScriptMTBold.ttf');
-    font-display: swap;
+  font-family: ScriptMT;
+  src: url("fonts/ScriptMTBold.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Monteci;
-    src: url('fonts/Monteci.otf');
-    font-weight: normal;
-    font-display: swap;
+  font-family: Monteci;
+  src: url("fonts/Monteci.otf");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Allura;
-    src: url('fonts/Allura-Regular.woff');
-    font-weight: normal;
-    font-display: swap;
+  font-family: Allura;
+  src: url("fonts/Allura-Regular.woff");
+  font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Grinched;
-    src: url('fonts/Grinched 2.0 DEMO.woff');
-    font-display: swap;
+  font-family: Grinched;
+  src: url("fonts/Grinched 2.0 DEMO.woff");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Gilroy;
-    src: url('fonts/Gilroy-Light.otf');
-    font-weight: light;
-    font-display: swap;
+  font-family: Gilroy;
+  src: url("fonts/Gilroy-Light.otf");
+  font-weight: light;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: Gilroy;
-    src: url('fonts/Gilroy-ExtraBold.otf');
-    font-weight: 800;
+  font-family: Gilroy;
+  src: url("fonts/Gilroy-ExtraBold.otf");
+  font-weight: 800;
 }
 
 @font-face {
-    font-family: Magnific Chaos;
-    src: url('fonts/MagnificChaosPersonalUseRegular-x3J88.ttf');
+  font-family: Magnific Chaos;
+  src: url("fonts/MagnificChaosPersonalUseRegular-x3J88.ttf");
 }
