@@ -3,9 +3,7 @@ const quizBox = document.getElementById("quiz_box");
 const timerText = document.getElementById("time");
 const questions = document.querySelectorAll(".question");
 const resultBox = document.getElementById("result");
-const options = document.querySelectorAll(".option");
 const indexNumber = document.getElementById("currentNumber");
-const correctOptions = document.querySelectorAll(".correctOptions");
 const checkboxes = document.querySelectorAll("input[type=radio]");
 const scoreText = document.getElementById("score_text");
 const resultIcon = document.getElementById("result-icon");
@@ -16,7 +14,6 @@ const answerBreakdown = document.getElementById("answer_breakdown");
 const feedBackText = document.getElementById("feedback_message");
 const prevBtn = document.getElementById("previous");
 const nextBtn = document.getElementById("next");
-const buttons = document.getElementById("buttons");
 let currentNumber = 1;
 let totalCount = questions.length;
 let secondsText;
@@ -127,7 +124,6 @@ function previousQuestion() {
 }
 
 function nextQuestion() {
-  console.log(correctAnswers);
   count++;
   currentNumber++;
   indexNumber.textContent = currentNumber;
@@ -136,14 +132,11 @@ function nextQuestion() {
 }
 function compileResult() {
   const options = document.querySelectorAll(
-    ".option input[type=radio]:checked"
+    ".option input[type=radio]:checked",
   );
-  console.log(correctAnswers);
   options.forEach((option) => {
-    console.log(option);
     if (option && option.classList.contains("correctOption")) {
       correctAnswers++;
-      console.log(correctAnswers);
     }
   });
 }
@@ -151,49 +144,6 @@ function compileResult() {
 function updateProgressBar() {
   let progressPercent = (currentNumber / totalCount) * 100;
   progressFill.style.width = `${progressPercent}%`;
-}
-
-function messageBox() {
-  var msg = "",
-    argNum = 0,
-    startPos,
-    endPos;
-  var args = messageBox.arguments;
-  var numArgs = args.length;
-
-  if (numArgs) {
-    var theStr = args[argNum++];
-
-    if (numArgs === 1 || theStr === "") {
-      msg = theStr;
-    } else {
-      startPos = 0;
-      endPos = theStr.indexOf("%s", startPos);
-
-      if (endPos === -1) {
-        startPos = theStr.length;
-      }
-
-      while (startPos < theStr.length) {
-        msg += theStr.substring(startPos, endPos);
-
-        if (argNum < numArgs) {
-          msg += args[argNum++];
-        }
-
-        startPos = endPos + 2;
-        endPos = theStr.indexOf("%s", startPos);
-
-        if (endPos === -1) {
-          endPos = theStr.length;
-        }
-      }
-      if (!msg) {
-        msg = args[0];
-      }
-    }
-  }
-  return msg;
 }
 
 function showResult() {
@@ -222,10 +172,10 @@ function showResult() {
 
   questions.forEach(function (question, index) {
     const selectedOption = document.querySelector(
-      `.question${index + 1} input[name=question${index + 1}]:checked`
+      `.question${index + 1} input[name=question${index + 1}]:checked`,
     );
     const correctAnswer = question.querySelector(
-      `.question${index + 1} .correctOption`
+      `.question${index + 1} .correctOption`,
     );
     const li = document.createElement("li");
     if (selectedOption && selectedOption.classList.contains("correctOption")) {
