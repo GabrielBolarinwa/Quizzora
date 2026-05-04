@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="fontawesome6/pro/css/all.min.css" />
-    <link rel="stylesheet" href="css/animate.min.css" />
-    <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css\style.css" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="fontawesome6/pro/css/all.min.css" rel="stylesheet" />
+    <link href="css/animate.min.css" rel="stylesheet" />
+    <link href="css/fonts.css" rel="stylesheet" />
+    <link href="css/variables.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <title>Web Development Quiz</title>
   </head>
 
@@ -43,7 +43,9 @@
               </p>
             </li>
             <li>
-              <p class="info">You'll get 1 point for each correct answer</p>
+              <p class="info">
+                You'll get 1 point for each correctIndex answer
+              </p>
             </li>
             <li>
               <p class="info">Enjoy your Quiz</p>
@@ -66,184 +68,41 @@
         <div class="progress_bar">
           <p class="progress_fill" id="progress_fill"></p>
         </div>
-        <section class="questions">
-          <section class="question question1 animate__animated">
-            <p class="question_text">
-              Which of the following is the latest version of HTML?
-            </p>
-            <form class="option_list">
-              <p class="option">
-                <input type="radio" name="question1" id="radiobutton1" />
-                <label for="radiobutton1"> HTML4 </label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question1" id="radiobutton2" />
-                <label for="radiobutton2"> HTML8</label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question1" id="radiobutton3" />
-                <label for="radiobutton3">HTML4</label>
-              </p>
-              <p class="option">
-                <input
-                  type="radio"
-                  name="question1"
-                  id="radiobutton4"
-                  class="correctOption"
-                />
-                <label for="radiobutton4"> HTML5</label>
-              </p>
-            </form>
-          </section>
-          <section class="question question2 animate__animated">
-            <p class="question_text">What is CSS?</p>
-            <form class="option_list">
-              <p class="option">
-                <input type="radio" name="question2" id="radiobutton5" />
-                <label for="radiobutton5"> Collapsing Styles Stack</label>
-              </p>
-              <p class="option">
-                <input
-                  type="radio"
-                  name="question2"
-                  id="radiobutton6"
-                  class="correctOption"
-                />
-                <label for="radiobutton6"> Cascading Style Sheets</label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question2" id="radiobutton7" />
-                <label for="radiobutton7"> Converging Style Sheets</label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question2" id="radiobutton8" />
-
-                <label for="radiobutton8"> Combined Source Styler</label>
-              </p>
-            </form>
-          </section>
-          <section class="question question3 animate__animated">
-            <p class="question_text">Which language runs in a web browser?</p>
-            <form class="option_list">
-              <p class="option">
-                <input type="radio" name="question3" id="radiobutton9" />
-                <label for="radiobutton9">Java</label>
-              </p>
-
-              <p class="option">
-                <input type="radio" name="question3" id="radiobutton10" />
-                <label for="radiobutton10">C</label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question3" id="radiobutton11" />
-                <label for="radiobutton11"> Python</label>
-              </p>
-              <p class="option">
-                <input
-                  type="radio"
-                  name="question3"
-                  id="radiobutton12"
-                  class="correctOption"
-                />
-                <label for="radiobutton12"> JavaScript</label>
-              </p>
-            </form>
-          </section>
-          <section class="question question4 animate__animated">
-            <p class="question_text">What does HTML stand for?</p>
-            <form class="option_list">
-              <p class="option">
-                <input
-                  type="radio"
-                  name="question4"
-                  id="radiobutton13"
-                  class="correctOption"
-                />
-                <label for="radiobutton13"> HyperText Markup Language</label>
-              </p>
-
-              <p class="option">
-                <input type="radio" name="question4" id="radiobutton14" /><label
-                  for="radiobutton14"
-                >
-                  HyperText Markdown Language</label
-                >
-              </p>
-
-              <p class="option">
-                <input type="radio" name="question4" id="radiobutton15" />
-                <label for="radiobutton15">Hyperloop Machine Language</label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question4" id="radiobutton16" />
-                <label for="radiobutton16">
-                  Helicopters Terminals Motorcycles Lamborgini</label
-                >
-              </p>
-            </form>
-          </section>
-          <section class="question question5 animate__animated">
-            <p class="question_text">What year was JavaScript launched?</p>
-            <form class="option_list">
-              <p class="option">
-                <input type="radio" name="question5" id="radiobutton17" />
-                <label for="radiobutton17"> 1996</label>
-              </p>
-              <p class="option">
-                <input
-                  type="radio"
-                  name="question5"
-                  id="radiobutton18"
-                  class="correctOption"
-                />
-                <label for="radiobutton18"> 1995</label>
-              </p>
-              <p class="option">
-                <input type="radio" name="question5" id="radiobutton19" />
-                <label for="radiobutton19"> 1994</label>
-              </p>
-
-              <p class="option">
-                <input type="radio" name="question5" id="radiobutton20" />
-                <label for="radiobutton20"> none of the above</label>
-              </p>
-            </form>
-          </section>
+        <section class="question">
+          <h3 class="question_text" id="question_text"></h3>
+          <div class="option_list" id="option_list"></div>
         </section>
         <footer>
           <div class="total_que">
-            <span>
+            <div>
               <p id="currentNumber">1</p>
               Of
               <p id="totalCount">2</p>
               Questions
-            </span>
+            </div>
           </div>
 
           <section class="question-controls">
             <div class="buttons" id="buttons">
               <button
-                title="Previous Question"
-                class="previous button"
+                class="previous button navigate"
                 id="previous"
                 onclick="previousQuestion()"
+                title="Previous Question"
               >
                 <span class="button-big">Previous</span>
                 <span class="button-small fa fa-chevron-left"></span>
               </button>
 
-              <div class="question-switch-buttons">
-                <button onclick="changeQuestion(0)">1</button
-                ><button onclick="changeQuestion(1)">2</button
-                ><button onclick="changeQuestion(2)">3</button
-                ><button onclick="changeQuestion(3)">4</button
-                ><button onclick="changeQuestion(4)">5</button>
-              </div>
+              <div
+                class="question-switch-buttons"
+                id="question-switch-buttons"
+              ></div>
               <button
-                class="next button"
-                title="Next Question"
+                class="next button navigate"
                 id="next"
                 onclick="nextQuestion()"
+                title="Next Question"
               >
                 <span class="button-big">Next</span>
                 <span class="button-small fa fa-chevron-right"></span>
@@ -260,7 +119,8 @@
         <div class="score_container">
           <span id="score_text"></span>
         </div>
-        <p class="feedback_message" id="feedback_message"></p>
+        <div class="feedback_message" id="feedback_message"></div>
+
         <section class="answer_breakdown">
           <ul id="answer_breakdown"></ul>
         </section>

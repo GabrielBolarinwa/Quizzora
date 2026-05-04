@@ -10,7 +10,6 @@
   font-display: swap;
 }
 
-
 @font-face {
   font-family: Museo;
   src: url("fonts/Museo700-Regular.otf");
@@ -72,4 +71,3 @@
   src: url("fonts/Gilroy-ExtraBold.otf");
   font-weight: 800;
 }
-

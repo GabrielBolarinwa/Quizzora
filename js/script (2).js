@@ -5,7 +5,7 @@ const quizData = [
     b: "C",
     c: "Python",
     d: "JavaScript",
-    correct: "d",
+    correctIndex: "d",
   },
   {
     question: "What does CSS stand for",
@@ -13,7 +13,7 @@ const quizData = [
     b: "Cascading Style Sheets",
     c: "Cascading Simple Sheets",
     d: "Cars SUVs Sailboats",
-    correct: "b",
+    correctIndex: "b",
   },
   {
     question: "What does HTML stand for",
@@ -21,7 +21,7 @@ const quizData = [
     b: "HyperText Markdown Language",
     c: "Hyperloop Machine Language",
     d: "Helicopters Terminals Motorcycles Lamborgini",
-    correct: "a",
+    correctIndex: "a",
   },
   {
     question: "What year was JavaScript launched",
@@ -29,7 +29,7 @@ const quizData = [
     b: "1995",
     c: "1994",
     d: "none of the above",
-    correct: "b",
+    correctIndex: "b",
   },
 ];
 const quiz = document.getElementById("quiz");
@@ -44,7 +44,6 @@ let currentQuiz = 0;
 let score = 0;
 loadQuiz();
 function loadQuiz() {
-  console.log("Function Called");
   // deselectAnswers()
   const currentQuizData = quizData[currentQuiz];
   questionEl.innerText = currentQuizData.question;
@@ -84,7 +83,7 @@ submitBtn.addEventListener("click", function (_e) {
     currentQuiz++;
     console.log(currentQuiz);
     try {
-      if (answer === quizData[currentQuiz].correct) {
+      if (answer === quizData[currentQuiz].correctIndex) {
         score++;
       }
     } catch (e) {

@@ -16,70 +16,23 @@
   --color-purple: #c445cd;
   --color-orange: #f66140;
 
-  /*Gradient*/
-  --pinkorange-repeating-gradient: radial-gradient(
-      49% 81% at 45% 47%,
-      rgba(255, 226, 3, 0.2705882353) 0%,
-      rgba(7, 58, 255, 0) 100%
-    ),
-    radial-gradient(142% 91% at -6% 74%, #ff0049 1%, rgba(255, 0, 0, 0) 99%),
-    repeating-linear-gradient(
-      276deg,
-      rgba(222, 24, 251, 0.7882352941) 61%,
-      rgba(255, 65, 65, 0) 99%
-    ),
-    radial-gradient(142% 91% at 111% 84%, #ff7000 0%, red 100%);
-
-  --bluegreen-repeating-gradient: repeating-linear-gradient(
-      276deg,
-      var(--color-blue) 61%,
-      var(--color-green) 99%
-    ),
-    radial-gradient(
-      49% 81% at 45% 47%,
-      var(--color-blue-light) 0%,
-      var(--color-yellow-light) 100%
-    ),
-    radial-gradient(
-      142% 91% at -6% 74%,
-      var(--color-blue-light) 1%,
-      var(--color-green) 99%
-    ),
-    radial-gradient(142% 91% at 111% 84%, var(--color-purple) 0%, blue 100%);
-  --bluegreen-radial-gradient: radial-gradient(
-    49% 81% at 45% 47%,
-    var(--color-blue-light) 0%,
-    var(--color-yellow-light) 100%
-  );
-  --default-gradient: linear-gradient(#000, #333);
-
-  /*Background values*/
-  --default-background: var(--color-dark) var(--default-gradient) center/cover
-    no-repeat fixed;
-
   /*Fonts*/
   --default-serif-font: "Zarathrustra", serif;
   --default-sans-serif: "Gilroy", sans-serif;
-  --default-display-font: "Orbitron", "Courier New", "Courier", monospace;
   --default-script-font: "Beanco", cursive;
-  --serif-font-1: "Monteci", serif;
-  --serif-font-2: "Encorpada" serif;
   --serif-font-3: "Museo", sans-serif;
   --sans-serif-font-1: "Poppins", sans-serif;
   --sans-serif-font-2: "Longstanding", sans-serif;
   --sans-serif-font-3: "Roboto", sans-serif;
   --script-font-1: "Gabriola", cursive;
-  --script-font-2: "Allura", cursive;
-  --script-font-3: "ScriptMT", cursive;
-  --display-font-1: "Grinched", Impact, "Arial Black", "Franklin Gothic Bold";
-  --display-font-2: "Magnific Chaos", serif;
 
   /*Text*/
   --text-shadow-black: 10px 10px 10px #000, 10px 10px 30px #000;
   --text-shadow-white: 10px 10px 10px #fff, 10px 10px 30px #fff;
   --text-shadow-dark: 0px 0px 10px var(--color-dark);
   --text-shadow-light: 0px 0px 10px var(--color-light);
-  --font-size-default: clamp(0.5rem, 0.5rem + 1vw, 2rem);
+  /*Text*/
+  --font-size-default: clamp(1rem, 0.5rem + 1vw, 2rem);
   --font-size-xl: clamp(2.5rem, 0.5rem + 3vw, 5rem);
   --font-size-large: clamp(2.25rem, 0.5rem + 2.5vw, 4rem);
   --font-size-big: clamp(2rem, 0.5rem + 2vw, 3rem);
@@ -95,13 +48,11 @@
   --size-value-large: calc(1.5rem + 1.5vw);
   --size-value-xl: calc(2rem + 2vw);
   --size-value-xxl: calc(2.5rem + 2vw);
-  --box-shadow-dark: 0px 0px 10px #000, 0 0 30px #000;
-  --box-shadow-light: 0 0 10px #fff;
-  --box-shadow-light-bright: 0 0 10px #fff, 0 0 50px #fff, 0 0 100px #fff,
-    0 0 150px #fff;
   --border-default: 1px solid #333;
-  --border-dark: 1px solid #000;
   --border-light: 1px solid #fff;
   --border-radius-default: 10px;
   --border-radius-circle: 50%;
+  --box-shadow-dark: 0px 0px 10px #000, 0 0 30px #000;
+  --box-shadow-light: 0 0 10px #fff;
+  --border-dark: 1px solid #000;
 }

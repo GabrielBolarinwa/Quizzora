@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.5s;
+  transition: 250ms;
   transition-property: transform, opacity, color, background-color;
 }
 
@@ -51,17 +51,6 @@ h2 {
 
 h3 {
   font-size: var(---font-size-medium);
-}
-
-table,
-tr,
-td,
-th,
-caption {
-  border: var(--border-default);
-  border-collapse: collapse;
-  padding: var(--size-value-small);
-  font-family: var(--sans-serif-font-1);
 }
 
 button {
@@ -117,15 +106,6 @@ textarea {
   font: inherit;
 }
 
-input:is([type="text"], [type="number"]):focus {
-  outline: none;
-}
-
-input[type="checkbox"] {
-  transform: scale(1.5);
-  margin: 0 12px 0 3px;
-}
-
 .start_btn,
 .info_box,
 .quiz_box,
@@ -166,7 +146,6 @@ input[type="checkbox"] {
   background: var(--color-white);
   border-radius: var(--border-radius-default);
   padding: var(--size-value-normal);
-  transition: 0.5s linear;
 }
 
 .info_box .info_title {
@@ -208,7 +187,6 @@ input[type="checkbox"] {
   color: #fff;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.5s ease;
   font-size: var(--font-size-normal);
   padding: var(--size-value-small) var(--size-value-normal);
   border-radius: var(--border-radius-default);
@@ -328,7 +306,7 @@ input[type="checkbox"] {
 }
 
 .quiz_box section:is(.question, .questions) {
-  margin: var(--size-value-normal) auto;
+  margin: var(--size-value-small) auto;
   width: 96%;
   overflow: auto;
   scrollbar-width: 0;
@@ -340,7 +318,6 @@ input[type="checkbox"] {
 }
 
 .quiz_box section .question_text {
-  font-size: var(--font-size-medium);
   font-weight: 600;
 }
 
@@ -387,25 +364,25 @@ section .option_list .option:hover {
   padding: var(--size-value-normal);
 }
 
-.quiz_box footer .total_que span {
+.quiz_box footer .total_que > div {
   display: flex;
   color: var(--color-light);
 }
 
-footer .total_que span p {
+footer .total_que > div p {
   font-weight: 500;
   padding: 0 var(--size-value-tiny);
 }
 
-footer .total_que span p:first-child {
-  padding-left: 0px;
+footer .total_que > div p:first-child {
+  padding-left: 0;
 }
 
 footer .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 0.5em;
 }
 
 footer .button:hover {
@@ -420,7 +397,7 @@ footer .button:hover {
   align-items: center;
   justify-content: space-between;
   position: relative;
-  padding: var(--size-value-small) var(--size-value-tiny);
+  padding: var(--size-value-normal) var(--size-value-normal);
   background: var(--color-light);
   font-size: clamp(1rem, 1.5rem, 2rem);
 }
@@ -428,8 +405,7 @@ footer .button:hover {
 .quiz_box .question-controls button {
   font-family: var(--default-sans-serif);
   background: var(--color-blue);
-  padding-block: 0;
-  height: 40px;
+  padding: var(--size-value-small) 10px;
 }
 
 .quiz_box .question-controls button:is(.next, .previous) span.button-small {
@@ -442,12 +418,6 @@ footer .button:hover {
   gap: 0.5em;
 }
 
-.quiz_box .question-controls .question-switch-buttons button {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-}
 .result_box {
   background-color: var(--color-white);
   width: clamp(300px, 65%, 500px);
@@ -514,13 +484,6 @@ footer .button:hover {
   opacity: 1;
 }
 
-.question {
-  display: none;
-}
-
-.displayQuestion {
-  display: block;
-}
 
 .showResult {
   display: flex;
@@ -587,12 +550,8 @@ footer .button:hover {
   .quiz_box,
   .result_box {
     position: absolute;
-    width: 100%;
+    width: 90%;
     flex-direction: column;
-  }
-
-  .display {
-    display: flex;
   }
 
   .start_btn {
@@ -612,7 +571,6 @@ footer .button:hover {
   }
   .quiz_box .question-controls button:is(.next, .previous) span.button-small {
     display: block;
-    width: 30px;
   }
 }
 
