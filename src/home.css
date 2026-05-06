@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @layer utilities {
     .feature_card {
-        @apply flex flex-col items-center max-w-[70%] relative w-[70vw] md:w-[50vw] xl:w-[25vw] h-100 hover:-translate-y-0.5 overflow-hidden;
+        @apply flex flex-col items-center max-w-[70%] relative w-[70vw] md:w-[45vw] xl:w-[25vw] h-100 hover:-translate-y-0.5 overflow-hidden;
     }
 
     .feature_card img {
