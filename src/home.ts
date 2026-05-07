@@ -12,7 +12,7 @@ document.getElementById("themeButton")?.addEventListener("click", () => {
   if (document.body.classList.contains("light")) setTheme("Dark");
   else if (document.body.classList.contains("dark")) setTheme("Auto");
   else setTheme("Light");
-});
+}, { once: true });
 
 let themeSetting = localStorage.getItem("themeSetting") as Theme;
 
@@ -47,12 +47,13 @@ const featureCards = document.querySelectorAll(
 ) as NodeListOf<HTMLDivElement>;
 
 function addAnimationClass(element: HTMLElement) {
+  element.classList.add("opacity-0");
   const animationObserver = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       let entry = e.target as HTMLElement;
       if (e.isIntersecting) {
         let animationClass = entry.getAttribute("data-animation") as string;
-        entry.classList.add(animationClass);
+        entry.classList.replace("opacity-0", animationClass);
       }
     });
   });
