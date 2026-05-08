@@ -7,6 +7,14 @@
 	      type="image/svg+xml"/>
 	<meta content="width=device-width, initial-scale=1.0"
 	      name="viewport"/>
+	<meta content="IE=edge"
+	      http-equiv="X-UA-Compatible">
+	<meta content="text/html;charset=UTF-8"
+	      http-equiv="Content-Type">
+	<meta content="Bolarinwa Gabriel"
+	      name="author">
+	<meta content="This is a project built as a subset of the Gabriel Bolarinwa Portfolio. Quizzora is a quiz application for taking interactive and customizable quizzes at a reasonable pace for the user to define."
+	      name="description"/>
 	<link href="/src/main.css"
 	      rel="stylesheet"/>
 	<link href="/src/home.css"
@@ -14,10 +22,7 @@
 	<link as="script"
 	      href="/src/quiz.ts"
 	      rel="preload"/>
-	<title>Quizzora</title>
-	<link href="src/main.css"
-	      rel="stylesheet">
-</head>
+	<title>Quizzora</title></head>
 <body class="text-(--primary)">
 
 <header
@@ -26,10 +31,10 @@
 	<div class="inline-flex justify-center items-center gap-2 md:gap-4">
 		<img
 				alt="Quizzora logo"
-				class="rounded-2xl h-12.5 w-12.5"
-				height="100"
-				src="/quizzora.png"
-				width="100"
+				class="rounded-full h-12.5 w-12.5"
+				height="96"
+				src="/quizzora.webp"
+				width="96"
 		/>
 		<p>Quizzora</p>
 	</div>
@@ -39,7 +44,8 @@
 		>
 			<li><a href="quiz.html">Take a quiz</a></li>
 			<li>
-				<button id="themeButton"
+				<button aria-label="Switch Theme"
+				        id="themeButton"
 				        type="button">
 					<span data-lucide="sun-moon"></span>
 				</button>
@@ -78,13 +84,17 @@
 			>
 				<img
 						alt="Science and nature image"
-						src="/features/adege-mushroom-7490921.jpg"
+						fetchpriority="high"
+						height="830"
+						src="/features/adege-mushroom-7490921.webp"
+						width="1280"
 				/>
 				<div class="feature_card_description">
 					<h3>Science and nature</h3>
 					<p>Test your knowledge of the natural world</p>
 				</div>
-				<a href="quiz.html?category=17"></a>
+				<a aria-label="Science and Nature Quiz"
+				   href="quiz.html?category=17"></a>
 			</div>
 			<div
 					class="feature_card group animate-in blur-in"
@@ -92,13 +102,16 @@
 			>
 				<img
 						alt="Computers image"
-						src="/features/rupixen-pen-4337521_1920.jpg"
+						height="865"
+						src="/features/rupixen-pen-4337521_1920.webp"
+						width="1280"
 				/>
 				<div class="feature_card_description">
 					<h3>Computers</h3>
 					<p>How well do you know the world of tech?</p>
 				</div>
-				<a href="quiz.html?category=18"></a>
+				<a aria-label="Computers Quiz"
+				   href="quiz.html?category=18"></a>
 			</div>
 			<div
 					class="feature_card group animate-in blur-in"
@@ -106,13 +119,16 @@
 			>
 				<img
 						alt="Mathematics image"
-						src="/features/stevepb-calculator-385506.jpg"
+						height="754"
+						src="/features/stevepb-calculator-385506.webp"
+						width="1280"
 				/>
 				<div class="feature_card_description">
 					<h3>Mathematics</h3>
 					<p>Put your numerical reasoning to the test</p>
 				</div>
-				<a href="quiz.html?category=20"></a>
+				<a aria-label="Mathematics Quiz"
+				   href="quiz.html?category=20"></a>
 			</div>
 			<div
 					class="feature_card group animate-in blur-in"
@@ -120,13 +136,16 @@
 			>
 				<img
 						alt="History image"
-						src="/features/arturo_anez-old-pages-10225493.jpg"
+						height="853"
+						src="/features/arturo_anez-old-pages-10225493.webp"
+						width="1280"
 				/>
 				<div class="feature_card_description">
 					<h3>History</h3>
 					<p>How much do you know about the past?</p>
 				</div>
-				<a href="quiz.html?category=23"></a>
+				<a aria-label="History Quiz"
+				   href="quiz.html?category=23"></a>
 			</div>
 			<div
 					class="feature_card group animate-in blur-in"
@@ -134,13 +153,16 @@
 			>
 				<img
 						alt="Geography image"
-						src="/features/archimar-globe-8840864_1920.jpg"
+						height="1031"
+						src="/features/archimar-globe-8840864_1920.webp"
+						width="1280"
 				/>
 				<div class="feature_card_description">
 					<h3>Geography</h3>
 					<p>Explore the world one question at a time</p>
 				</div>
-				<a href="quiz.html?category=22"></a>
+				<a aria-label="Geography Quiz"
+				   href="quiz.html?category=22"></a>
 			</div>
 			<div
 					class="feature_card group animate-in blur-in"
@@ -148,13 +170,16 @@
 			>
 				<img
 						alt="Animals image"
-						src="/features/designerpoint-leopard-515509_1920.jpg"
+						height="853"
+						src="/features/designerpoint-leopard-515509_1920.webp"
+						width="1280"
 				/>
 				<div class="feature_card_description">
 					<h3>Animals</h3>
 					<p>From pets to wildlife — how much do you know?</p>
 				</div>
-				<a href="quiz.html?category=27"></a>
+				<a aria-label="Animals Quiz"
+				   href="quiz.html?category=27"></a>
 			</div>
 		</div>
 	</section>

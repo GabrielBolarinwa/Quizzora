@@ -1,8 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+@layer base {
+    @keyframes animateZoomIn {
+        0% {
+            opacity: 0;
+            scale: 0;
+        }
+        100% {
+            opacity: 1;
+            scale: 1;
+        }
+    }
+    .animate-zoom-in {
+        animation: animateZoomIn 0.5s forwards ease-out;
+    }
+}
+
 @layer utilities {
     .feature_card {
-        @apply flex flex-col items-center max-w-[70%] relative w-[70vw] md:w-[45vw] xl:w-[25vw] h-100 hover:-translate-y-0.5 overflow-hidden;
+        @apply flex flex-col items-center max-w-[70%] relative w-[70vw] md:w-[45vw] xl:w-[25vw] h-100 hover:-translate-y-0.5 overflow-hidden duration-1000;
     }
 
     .feature_card img {
@@ -26,7 +43,7 @@
     }
 
     .last_result_widget {
-        @apply fixed bottom-0 left-0 rounded-tr-lg bg-(--surface-2) border-(--border-gray-200) shadow-md flex justify-center items-center p-3 gap-4 cursor-pointer;
+        @apply fixed bottom-0 left-0 rounded-tr-lg bg-(--surface-2) border-(--border-gray-200) shadow-md flex justify-center items-center p-3 gap-4 cursor-pointer z-40;
     }
 
     .last_result_widget button {
@@ -34,11 +51,16 @@
     }
 
     .full_last_result {
-        @apply flex-col items-center justify-center fixed top-[50%] left-[50%] z-20 translate-[-50%] bg-(--surface-2) border-(--border) shadow-lg  p-5 text-center gap-4 hidden;
+        @apply flex-col items-center justify-center fixed top-[50%] left-[50%] z-20 translate-[-50%] bg-(--surface-2) border-(--border) shadow-lg  p-5 text-center gap-4 hidden w-[80%] lg:w-[60%] rounded-2xl;
     }
+
 
     .result_meta {
         @apply flex flex-col gap-1
+    }
+
+    .result_breakdown summary {
+        @apply cursor-pointer
     }
 
     .result_breakdown h4 {
