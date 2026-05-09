@@ -1,216 +1,206 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8"/>
-	<link href="/favicon.svg"
-	      rel="icon"
-	      type="image/svg+xml"/>
-	<meta content="width=device-width, initial-scale=1.0"
-	      name="viewport"/>
-	<meta content="IE=edge"
-	      http-equiv="X-UA-Compatible">
-	<meta content="text/html;charset=UTF-8"
-	      http-equiv="Content-Type">
-	<meta content="Bolarinwa Gabriel"
-	      name="author">
-	<meta content="This is a project built as a subset of the Gabriel Bolarinwa Portfolio. Quizzora is a quiz application for taking interactive and customizable quizzes at a reasonable pace for the user to define."
-	      name="description"/>
-	<meta content="Quizzora"
-	      lang="en"
-	      name="application-name"/>
-	<meta content="Quizzora"
-	      property="og:title"/>
-	<meta content="Take quizzes at a user defined pace with Quizzora"
-	      property="og:description"/>
-	<meta content="https://gabrielbolarinwa-quizzora.vercel.app"
-	      property="og:image"/>
-	<meta content="https://gabrielbolarinwa-quizzora.vercel.app/opengraph-image.png"
-	      property="og:url"/>
-	<meta content="website"
-	      property="og:type"/>
-	<link href="/src/main.css"
-	      rel="stylesheet"/>
-	<link href="/src/home.css"
-	      rel="stylesheet"/>
-	<link as="script"
-	      href="/src/quiz.ts"
-	      rel="preload"/>
-	<title>Quizzora</title></head>
-<body class="text-(--primary)">
-
-<header class="flex items-center justify-between w-full bg-(--surface-1) border-(--border) text-(--primary) sticky py-4 px-4 md:px-6"
-        role="banner"
->
-	<div class="inline-flex justify-center items-center gap-2 md:gap-4">
-		<img
-				alt="Quizzora logo"
-				class="rounded-full h-12.5 w-12.5"
-				height="96"
-				src="/quizzora.webp"
-				width="96"
-		/>
-		<p>Quizzora</p>
-	</div>
-	<nav>
-		<ul
-				class="inline-flex justify-end gap-2 md:gap-4 items-center list-none"
-		>
-			<li><a href="quiz.html">Take a quiz</a></li>
-			<li>
-				<button aria-label="Switch Theme"
-				        id="themeButton"
-				        type="button">
-					<span data-lucide="sun-moon"></span>
-				</button>
-			</li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section
-			class="bg-primary-gradient flex flex-col gap-6 justify-center items-center text-center min-h-[65dvh]"
-	>
-		<h1>Welcome to Quizzora</h1>
-		<p class="text-(--text-secondary)">
-			Challenge your mind across categories — pick a topic, set your pace
-			and see how you score.
-		</p>
-		<a
-				class="bg-(--primary) text-(--bg) rounded-2xl p-4 border-(--primary) hover:bg-(--hover) hover:[border-style:outset] border-2"
-				href="quiz.html"
-		>
-			Take a Quiz
-		</a>
-	</section>
-	<section>
-		<div
-				class="section_header mb-8 animate-in fade-in"
-				data-animation="slide-in-from-left"
-		>
-			<h2>Featured Quizzes</h2>
-			<p>These are some of the most popular quizzes</p>
-		</div>
-		<div class="flex flex-wrap gap-10 justify-center items-center">
-			<div
-					class="feature_card group animate-in blur-in"
-					data-animation="slide-in-from-top"
-			>
-				<img
-						alt="Science and nature image"
-						fetchpriority="high"
-						height="830"
-						src="/features/adege-mushroom-7490921.webp"
-						width="1280"
-				/>
-				<div class="feature_card_description">
-					<h3>Science and nature</h3>
-					<p>Test your knowledge of the natural world</p>
-				</div>
-				<a aria-label="Science and Nature Quiz"
-				   href="quiz.html?category=17"></a>
-			</div>
-			<div
-					class="feature_card group animate-in blur-in"
-					data-animation="slide-in-from-top"
-			>
-				<img
-						alt="Computers image"
-						height="865"
-						src="/features/rupixen-pen-4337521_1920.webp"
-						width="1280"
-				/>
-				<div class="feature_card_description">
-					<h3>Computers</h3>
-					<p>How well do you know the world of tech?</p>
-				</div>
-				<a aria-label="Computers Quiz"
-				   href="quiz.html?category=18"></a>
-			</div>
-			<div
-					class="feature_card group animate-in blur-in"
-					data-animation="slide-in-from-top"
-			>
-				<img
-						alt="Mathematics image"
-						height="754"
-						src="/features/stevepb-calculator-385506.webp"
-						width="1280"
-				/>
-				<div class="feature_card_description">
-					<h3>Mathematics</h3>
-					<p>Put your numerical reasoning to the test</p>
-				</div>
-				<a aria-label="Mathematics Quiz"
-				   href="quiz.html?category=20"></a>
-			</div>
-			<div
-					class="feature_card group animate-in blur-in"
-					data-animation="slide-in-from-top"
-			>
-				<img
-						alt="History image"
-						height="853"
-						src="/features/arturo_anez-old-pages-10225493.webp"
-						width="1280"
-				/>
-				<div class="feature_card_description">
-					<h3>History</h3>
-					<p>How much do you know about the past?</p>
-				</div>
-				<a aria-label="History Quiz"
-				   href="quiz.html?category=23"></a>
-			</div>
-			<div
-					class="feature_card group animate-in blur-in"
-					data-animation="slide-in-from-top"
-			>
-				<img
-						alt="Geography image"
-						height="1031"
-						src="/features/archimar-globe-8840864_1920.webp"
-						width="1280"
-				/>
-				<div class="feature_card_description">
-					<h3>Geography</h3>
-					<p>Explore the world one question at a time</p>
-				</div>
-				<a aria-label="Geography Quiz"
-				   href="quiz.html?category=22"></a>
-			</div>
-			<div
-					class="feature_card group animate-in blur-in"
-					data-animation="slide-in-from-top"
-			>
-				<img
-						alt="Animals image"
-						height="853"
-						src="/features/designerpoint-leopard-515509_1920.webp"
-						width="1280"
-				/>
-				<div class="feature_card_description">
-					<h3>Animals</h3>
-					<p>From pets to wildlife — how much do you know?</p>
-				</div>
-				<a aria-label="Animals Quiz"
-				   href="quiz.html?category=27"></a>
-			</div>
-		</div>
-	</section>
-</main>
-<footer class="text-center bg-(--surface-1) border-t-(--border) flex flex-col gap-3 py-3"
-        role="contentinfo"
->
-	<div class="contact-links text-(--primary) flex gap-3 justify-center">
-		<a href="https://github.com/GabrielBolarinwa">GitHub</a> &bullet;
-		<a href="mailto:gabibola955@gmail.com">Email</a>
-		&bullet;
-		<a href="https://x.com/GabrielBol94988">Twitter (X)</a>
-	</div>
-	<p class="text-(--text-muted)">
-		&copy; <span id="yearText"></span> Quizzora. All rights reserved
-	</p>
-</footer>
-<script src="/src/home.ts"
-        type="module"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="Bolarinwa Gabriel" name="author" />
+    <meta
+      content="This is a project built as a subset of the Gabriel Bolarinwa Portfolio. Quizzora is a quiz application for taking interactive and customizable quizzes at a reasonable pace for the user to define."
+      name="description"
+    />
+    <meta content="Quizzora" lang="en" name="application-name" />
+    <meta content="Quizzora" property="og:title" />
+    <meta
+      content="Take quizzes at a user defined pace with Quizzora"
+      property="og:description"
+    />
+    <meta
+      content="https://gabrielbolarinwa-quizzora.vercel.app"
+      property="og:image"
+    />
+    <meta
+      content="https://gabrielbolarinwa-quizzora.vercel.app/opengraph-image.png"
+      property="og:url"
+    />
+    <meta content="website" property="og:type" />
+    <link href="/src/main.css" rel="stylesheet" />
+    <link href="/src/home.css" rel="stylesheet" />
+    <link rel="preload" href="/src/quiz.ts" as="script" />
+    <title>Quizzora</title>
+  </head>
+  <body class="text-(--primary)">
+    <header
+      class="flex items-center justify-between w-full bg-(--surface-1) border-(--border) text-(--primary) sticky py-4 px-4 md:px-6"
+      role="banner"
+    >
+      <div class="inline-flex justify-center items-center gap-2 md:gap-4">
+        <img
+          alt="Quizzora logo"
+          class="rounded-full h-12.5 w-12.5"
+          height="96"
+          src="/quizzora.webp"
+          width="96"
+        />
+        <p>Quizzora</p>
+      </div>
+      <nav>
+        <ul
+          class="inline-flex justify-end gap-2 md:gap-4 items-center list-none"
+        >
+          <li><a href="quiz.html">Take a quiz</a></li>
+          <li>
+            <button aria-label="Switch Theme" id="themeButton" type="button">
+              <span data-lucide="sun-moon"></span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section
+        class="bg-primary-gradient flex flex-col gap-6 justify-center items-center text-center min-h-[65dvh]"
+      >
+        <h1>Welcome to Quizzora</h1>
+        <p class="text-(--text-secondary)">
+          Challenge your mind across categories — pick a topic, set your pace
+          and see how you score.
+        </p>
+        <a
+          class="bg-(--primary) text-(--bg) rounded-2xl p-4 border-(--primary) hover:bg-(--hover) hover:[border-style:outset] border-2"
+          href="quiz.html"
+        >
+          Take a Quiz
+        </a>
+      </section>
+      <section>
+        <div
+          class="section_header mb-8 animate-in fade-in"
+          data-animation="slide-in-from-left"
+        >
+          <h2>Featured Quizzes</h2>
+          <p>These are some of the most popular quizzes</p>
+        </div>
+        <ul class="flex flex-wrap gap-10 justify-center items-center">
+          <li
+            class="feature_card group animate-in blur-in"
+            data-animation="slide-in-from-top"
+          >
+            <img
+              alt="Science and nature image"
+              fetchpriority="high"
+              height="830"
+              src="/features/adege-mushroom-7490921.webp"
+              width="1280"
+            />
+            <div class="feature_card_description">
+              <h3>Science and nature</h3>
+              <p>Test your knowledge of the natural world</p>
+            </div>
+            <a
+              aria-label="Science and Nature Quiz"
+              href="quiz.html?category=17"
+            ></a>
+          </li>
+          <li
+            class="feature_card group animate-in blur-in"
+            data-animation="slide-in-from-top"
+          >
+            <img
+              alt="Computers image"
+              height="865"
+              src="/features/rupixen-pen-4337521_1920.webp"
+              width="1280"
+            />
+            <div class="feature_card_description">
+              <h3>Computers</h3>
+              <p>How well do you know the world of tech?</p>
+            </div>
+            <a aria-label="Computers Quiz" href="quiz.html?category=18"></a>
+          </li>
+          <li
+            class="feature_card group animate-in blur-in"
+            data-animation="slide-in-from-top"
+          >
+            <img
+              alt="Mathematics image"
+              height="754"
+              src="/features/stevepb-calculator-385506.webp"
+              width="1280"
+            />
+            <div class="feature_card_description">
+              <h3>Mathematics</h3>
+              <p>Put your numerical reasoning to the test</p>
+            </div>
+            <a aria-label="Mathematics Quiz" href="quiz.html?category=20"></a>
+          </li>
+          <li
+            class="feature_card group animate-in blur-in"
+            data-animation="slide-in-from-top"
+          >
+            <img
+              alt="History image"
+              height="853"
+              src="/features/arturo_anez-old-pages-10225493.webp"
+              width="1280"
+            />
+            <div class="feature_card_description">
+              <h3>History</h3>
+              <p>How much do you know about the past?</p>
+            </div>
+            <a aria-label="History Quiz" href="quiz.html?category=23"></a>
+          </li>
+          <li
+            class="feature_card group animate-in blur-in"
+            data-animation="slide-in-from-top"
+          >
+            <img
+              alt="Geography image"
+              height="1031"
+              src="/features/archimar-globe-8840864_1920.webp"
+              width="1280"
+            />
+            <div class="feature_card_description">
+              <h3>Geography</h3>
+              <p>Explore the world one question at a time</p>
+            </div>
+            <a aria-label="Geography Quiz" href="quiz.html?category=22"></a>
+          </li>
+          <li
+            class="feature_card group animate-in blur-in"
+            data-animation="slide-in-from-top"
+          >
+            <img
+              alt="Animals image"
+              height="853"
+              src="/features/designerpoint-leopard-515509_1920.webp"
+              width="1280"
+            />
+            <div class="feature_card_description">
+              <h3>Animals</h3>
+              <p>From pets to wildlife — how much do you know?</p>
+            </div>
+            <a aria-label="Animals Quiz" href="quiz.html?category=27"></a>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer
+      class="text-center bg-(--surface-1) border-t-(--border) flex flex-col gap-3 py-3"
+      role="contentinfo"
+    >
+      <div class="contact-links text-(--primary) flex gap-3 justify-center">
+        <a href="https://github.com/GabrielBolarinwa">GitHub</a> &bullet;
+        <a href="mailto:gabibola955@gmail.com">Email</a>
+        &bullet;
+        <a href="https://x.com/GabrielBol94988">Twitter (X)</a>
+      </div>
+      <p class="text-(--text-muted)">
+        &copy; <span id="yearText"></span> Quizzora. All rights reserved
+      </p>
+    </footer>
+    <script src="/src/home.ts" type="module"></script>
+  </body>
 </html>

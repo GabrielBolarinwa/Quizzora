@@ -26,6 +26,7 @@ import {
 } from "./utils";
 import { session, setSession } from "./session.ts";
 import events from "./events.ts";
+import { trapFocus } from "./utils/home.ts";
 
 createIcons({
   icons: {
@@ -418,17 +419,24 @@ function showConfirmationModal(
   document.getElementById("answeredQuestions")!.textContent =
     answeredCount.toString();
   document.getElementById("totalQuestion")!.textContent = total.toString();
-  const confirmationModel = document.getElementById(
+  const confirmationModal = document.getElementById(
     "confirmationModal",
   ) as HTMLDivElement;
-  confirmationModel.classList.remove("hidden");
+  confirmationModal.classList.remove("hidden");
+  trapFocus(confirmationModal);
   eventListener(document.getElementById("submitQuiz")!, "click", () => {
     modalOptions.onConfirm();
-    confirmationModel.classList.add("hidden");
+    confirmationModal.classList.add("hidden");
   });
   eventListener(document.getElementById("resumeQuizButton")!, "click", () => {
     modalOptions.onCancel();
-    confirmationModel.classList.add("hidden");
+    confirmationModal.classList.add("hidden");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      confirmationModal.classList.add("hidden");
+      modalOptions.onCancel();
+    }
   });
 }
 
