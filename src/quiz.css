@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+    --font-question: "Inter", sans-serif, system-ui;
+    --font-option: "Lato", sans-serif, system-ui;
+}
+
+@layer utilities {
+    [data-section] {
+        @apply opacity-0 hidden transition-opacity;
+    }
+
+    [data-section].active {
+        @apply opacity-100 block;
+    }
+
+    .quiz_card {
+        @apply bg-(--primary) p-10 rounded-xl flex-col justify-center items-center gap-4 min-w-75 w-[50%] max-w-125;
+    }
+
+    .quiz_card__form .field {
+        @apply flex flex-col justify-center p-0 gap-2;
+    }
+
+    .field .error {
+        @apply text-(--error) text-xs;
+    }
+
+    .field .difficultyOption {
+        @apply flex gap-2
+    }
+
+    .rules_box .rule-btn {
+        @apply p-2 rounded-lg text-white ;
+    }
+
+    .main_content {
+        @apply overflow-hidden  mx-auto
+    }
+
+    .quiz_box .option {
+        @apply flex items-center py-3 ps-4 gap-4 text-[1.20rem] border-(--border) border-4 rounded-2xl hover:bg-(--surface-2) w-[90%] font-(family-name:--font-option);
+    }
+
+    .option label {
+        @apply w-full;
+    }
+
+    .option input[type="radio"] {
+        @apply rounded-lg scale-120;
+    }
+
+    .navigation_button {
+        @apply bg-(--surface-1) rounded-2xl px-2 lg:px-4 hover:bg-(--surface-2)
+    }
+
+    .navigation_button:disabled {
+        @apply bg-(--text-muted) cursor-not-allowed;
+    }
+
+    .question_switch_buttons .navigation_button {
+        @apply px-4;
+    }
+
+    .navigation_button.selected {
+        @apply bg-[rgba(26,188,156,0.15)]
+    }
+
+    .navigation_button.answered {
+        @apply bg-(--success) border border-(--border)
+    }
+
+    .results * {
+        @apply font-(family-name:--font-option);
+    }
+
+    .results .resultText.ok {
+        @apply text-(--success)
+    }
+
+    .results .resultText.notOk {
+        @apply text-(--error)
+    }
+
+    .breakdownList li {
+        @apply py-1 ps-2 w-full
+    }
+
+    .breakdownList li.correct {
+        @apply bg-(--correct) text-(--success)
+    }
+
+    .breakdownList li.incorrect {
+        @apply bg-(--incorrect) text-(--error)
+
+    }
+
+    .quizNavigation .quizNav {
+        @apply bg-(--info) text-white md:py-2 md:px-5 p-2
+    }
+}
