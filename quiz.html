@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="absolute flex flex-col group top-5 right-5 z-20 gap-4">
-      <button class="cursor-pointer p-0 relative">
+      <button aria-label="Quiz Shortcuts" class="cursor-pointer p-0 relative">
         <span color="#ffffff" data-lucide="circle-question-mark"></span>
       </button>
       <div
@@ -36,14 +36,18 @@
           id="quizForm"
         >
           <div class="field">
-            <label for="questionCategories">Quiz category:</label>
+            <label for="questionCategories"
+              >Quiz category: <span class="text-red-500">*</span></label
+            >
             <select id="questionCategories" name="questionCategories"></select>
             <p class="error hidden" id="categoryError">
               Failed to fetch categories, please refresh to try again
             </p>
           </div>
           <div class="field">
-            <label for="questionNumber">Number of Questions:</label>
+            <label for="questionNumber"
+              >Number of Questions: <span class="text-red-500">*</span></label
+            >
             <input
               id="questionNumber"
               max="50"
@@ -57,7 +61,9 @@
             </p>
           </div>
           <div class="field">
-            <p class="text-base">Difficulty:</p>
+            <p class="text-base">
+              Difficulty: <span class="text-red-500">*</span>
+            </p>
             <div class="difficultyOption">
               <input
                 id="easy"
