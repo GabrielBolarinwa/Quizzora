@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+	      name="viewport">
+	<meta content="ie=edge"
+	      http-equiv="X-UA-Compatible">
+	<title>Quizzora</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		@media (prefers-color-scheme: light) {
+			:root {
+				--bg: #fafafa;
+				--primary: #121212;
+				--surface-1: #ffffff;
+				--surface-2: #f0f0f0;
+				--surface-3: #e6e6e6;
+				--border: #dddddd;
+				--divider: #eaeaea;
+				--text-secondary: #555555;
+				--text-muted: #707070;
+				--text-disabled: #bbbbbb;
+			}
+		}
+		
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--bg: #121212;
+				--primary: #e0e0e0;
+				--surface-1: #1e1e1e;
+				--surface-2: #2a2a2a;
+				--surface-3: #333333;
+				--border: #2c2c2c;
+				--divider: #3a3a3a;
+				--text-secondary: #a0a0a0;
+				--text-muted: #888888;
+				--text-disabled: #505050;
+			}
+		}
+		
+		main {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100dvh;
+			background: var(--bg);
+			color: var(--primary);
+			gap: 1em;
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		}
+		
+		main img {
+			width: 200px;
+			height: 200px;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+<main>
+	<img alt="Quizzora Logo"
+	     height="96"
+	     src="/quizzora.webp"
+	     width="96">
+	<h1>You are offline</h1>
+	<p>Connect back to the internet to get the ultimate quiz taking experience</p>
+</main>
+</body>
+</html>
