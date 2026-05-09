@@ -1,253 +1,280 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-	      name="viewport">
-	<meta content="ie=edge"
-	      http-equiv="X-UA-Compatible">
-	<link href="/src/main.css"
-	      rel="stylesheet"/>
-	<link href="/src/quiz.css"
-	      rel="stylesheet">
-	<title>Quizzora - Quiz Page</title>
-</head>
-<body>
-<div class="absolute flex flex-col group top-5 right-5 z-20 gap-4">
-	<button class="cursor-pointer p-0 relative"><span color="#ffffff"
-	                                                  data-lucide="circle-question-mark"></span>
-	</button>
-	<div class="hidden group-hover:block bg-(--surface-2) text-white absolute right-0 top-7.5 w-max pr-4 pl-7 py-4">
-		<p>Shortcut Guide for quiz:</p>
-		<ul class="list-disc">
-			<li>Press "S" to trigger the Submit Dialog</li>
-			<li>Press "N" for next question</li>
-			<li>Press "P" for previous question</li>
-			<li>Press "1-4" for selecting option 1 to 4</li>
-		</ul>
-	</div>
-</div>
-<main class="flex justify-center items-center min-h-screen relative">
-	<section class="quiz_card active"
-	         data-section="config">
-		<h2 class="text-(--surface-3) text-2xl">Define Your Quiz</h2>
-		<form class="quiz_card__form gap-x-4 gap-y-4 flex flex-col justify-center w-full"
-		      id="quizForm">
-			<div class="field">
-				<label for="questionCategories">Quiz category:</label>
-				<select id="questionCategories"
-				        name="questionCategories">
-				
-				</select>
-				<p class="error hidden"
-				   id="categoryError">Failed to fetch categories, please refresh to try again</p>
-			</div>
-			<div class="field">
-				<label for="questionNumber">Number of Questions:</label>
-				<input id="questionNumber"
-				       max="60"
-				       min="10"
-				       name="questionNumber"
-				       type="number"
-				       value="10">
-				<p class="error hidden"
-				   id="questionNumberError">Please select a proper number of questions</p>
-			</div>
-			<div class="field">
-				<p class="text-base">Difficulty:</p>
-				<div class="difficultyOption">
-					<input id="easy"
-					       name="difficultyOption"
-					       type="radio"
-					       value="easy">
-					<label for="easy">Easy</label>
-				</div>
-				<div class="difficultyOption"><input id="medium"
-				                                     name="difficultyOption"
-				                                     type="radio"
-				                                     value="medium"><label for="medium">Medium</label>
-				</div>
-				<div class="difficultyOption"><input id="hard"
-				                                     name="difficultyOption"
-				                                     type="radio"
-				                                     value="hard"> <label for="hard">Hard</label>
-				</div>
-				
-				<p class="error hidden"
-				   id="difficultyError">Please select a difficulty</p>
-			</div>
-			<button class="bg-(--success) py-2 px-3 rounded-lg text-white"
-			        id="startQuizButton"
-			        type="submit">Start Quiz
-			</button>
-		</form>
-	</section>
-	<section class="quiz_card rules_box"
-	         data-section="rules">
-		<h2 class="text-(--surface-3) mb-3 text-center text-2xl">Rules</h2>
-		<div class="info_list">
-			<ol class="list-decimal flex flex-col justify-center gap-2">
-				<li>
-					<p class="info">
-						You will be given a total of
-						<span class="text-blue-400 bg-[#00000060] py-0.5 px-2"
-						      id="time-text">3 Minutes</span> to
-						attempt
-						all
-						questions
-					</p>
-				</li>
-				<li>
-					<p class="info">
-						Once the time exhausts its limit, the quiz will automatically be
-						ended and the result will automatically be submitted
-					</p>
-				</li>
-				<li>
-					<p class="info">
-						There will be no going back once the quiz starts
-					</p>
-				</li>
-				<li>
-					<p class="info">
-						You cannot choose more than one option at a time.
-					</p>
-				</li>
-				<li>
-					<p class="info">You'll get 1 point for each correct answer</p>
-				</li>
-				<li>
-					<p class="info">Enjoy your Quiz</p>
-				</li>
-			</ol>
-		</div>
-		<div class="buttons mt-4 flex gap-5 justify-end">
-			<button class="exit bg-(--info) rule-btn"
-			        id="exitQuiz">Exit Quiz
-			</button>
-			<button class="continue bg-(--success) rule-btn"
-			        id="startQuiz">Continue
-			</button>
-		</div>
-	</section>
-	<section class="quiz_card quiz_box w-[60%]! max-w-none! relative p-0! m-0! rounded-3xl overflow-hidden"
-	         data-section="quiz">
-		<header class="flex justify-between items-center w-full bg-(--surface-2) text-white px-5">
-			<h3 class="text-xl"
-			    id="quiz_title">Quizzora</h3>
-			<div class="bg-(--info) py-3 px-1.5 flex justify-center items-center gap-2 w-fit">
-				<p class="w-min">Time Left</p>
-				<p class="bg-(--surface-1) p-2 rounded-sm"
-				   id="timer"></p>
-			</div>
-		</header>
-		<div class="main_content h-3 my-4 w-[70%] min-w-60 rounded-3xl">
-			<div class="bg-(--info) h-full transition"
-			     id="progressBar"></div>
-		</div>
-		<div aria-live="polite"
-		     class="main_content flex flex-col justify-start question_box my-8 w-[80%] text-wrap text-left">
-			<h4 class="text-xl mb-4 font-(family-name:--font-question)"
-			    id="questionText"></h4>
-			<div class="flex flex-col gap-5 items-center"
-			     id="optionList">
-			
-			</div>
-		</div>
-		<footer class="flex justify-between flex-col items-center w-full text-white">
-			<div class="bg-(--surface-2) px-4 md:px-12 py-3 w-full justify-between items-center">
-				<p><span id="currentQuestion"></span> of <span id="totalQuestions"></span>
-					Questions</p>
-			</div>
-			<div class="px-2 md:px-4 py-1 flex justify-between items-center w-full">
-				<button class="navigation_button"
-				        id="previousQuestion"><span class="hidden lg:block">Previous</span>
-					<span aria-label="Previous Question"
-					      class="block lg:hidden"
-					      data-lucide="chevron-left"></span>
-				</button>
-				<div class="question_switch_buttons flex items-center max-w-[60%] gap-2 mt-2 pb-2 overflow-x-auto"
-				     id="questionSwitches">
-				
-				</div>
-				<button class="navigation_button"
-				        id="nextQuestion"><span class="hidden lg:block">Next</span>
-					<span aria-label="Next Question"
-					      class="block lg:hidden"
-					      data-lucide="chevron-right"></span>
-				</button>
-			</div>
-			<div class="w-full flex justify-end my-3 px-2">
-				<button class="bg-(--success) rounded-2xl"
-				        id="requestSubmit">Submit Quiz
-				</button>
-			</div>
-		</footer>
-	</section>
-	<section class="quiz_card font-(family-name:--font-option)! results text-center"
-	         data-section="results">
-		<div
-				aria-hidden="true"
-				class="flex justify-center items-center"
-				id="resultIcon">
-			<span class="icon"
-			      height="150"
-			      width="150"></span>
-		</div>
-		<div class="flex flex-col justify-center items-center gap-2">
-			<h2>You've completed the Quiz</h2>
-			<p class="scoreText"
-			   id="scoreText"></p>
-			<h3 class="resultText ok"
-			    id="feedbackText"></h3>
-		</div>
-		<details class="text-left mt-3.5">
-			<summary class="cursor-pointer text-center">Answer Details</summary>
-			<ul class="breakdownList flex flex-col items-center gap-3 overflow-y-auto max-h-[50vh]"
-			    id="answer_breakdown">
-			</ul>
-		</details>
-		<div class="quizNavigation flex md:px-10 mt-4 justify-between items-center">
-			<button class="quizNav"
-			        id="replayQuizButton">Replay Quiz
-			</button>
-			<button class="quizNav"
-			        id="quitQuizButton">Quit Quiz
-			</button>
-		</div>
-	</section>
-	<div class="fixed top-0 left-0 h-dvh w-full bg-(--overlay) hidden"
-	     id="confirmationModal">
-		<div class="flex flex-col justify-center items-center text-center absolute z-20 bg-(--primary) top-[35%] left-[50%] translate-x-[-50%] p-5 rounded-2xl gap-6">
-			<div aria-hidden="true"
-			     class="warning-icon text-(--warning)">
-				<i
-						data-lucide="info"
-						height="100"
-						width="100"></i>
-			</div>
-			<div class="flex flex-col gap-2 font-(--font-option)">
-				<p class="text-xl font-bold">Are you sure you want to submit?</p>
-				<p class="text-xs opacity-80">You have answered <span id="answeredQuestions"></span>
-					out of <span id="totalQuestion"></span> questions</p>
-				<p class="text-xs opacity-70">This action is irreversible</p>
-			</div>
-			<div class="flex items-center gap-5 text-white">
-				<button class="bg-(--success)"
-				        id="submitQuiz">Submit Quiz
-				</button>
-				<button class="bg-(--info)"
-				        id="resumeQuizButton">Go back
-				</button>
-			</div>
-		</div>
-	</div>
-	<a class="absolute none md:flex justify-center items-center gap-2 bottom-6 left-6 text-white"
-	   href="/"><span
-			aria-hidden="true"
-			data-lucide="arrow-left"></span>Go back home</a>
-</main>
-<script src="/src/quiz.ts"
-        type="module"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <link href="/src/main.css" rel="stylesheet" />
+    <link href="/src/quiz.css" rel="stylesheet" />
+    <title>Quizzora - Quiz Page</title>
+  </head>
+  <body>
+    <div class="absolute flex flex-col group top-5 right-5 z-20 gap-4">
+      <button class="cursor-pointer p-0 relative">
+        <span color="#ffffff" data-lucide="circle-question-mark"></span>
+      </button>
+      <div
+        class="hidden group-hover:block bg-(--surface-2) text-white absolute right-0 top-7.5 w-max pr-4 pl-7 py-4"
+      >
+        <p>Shortcut Guide for quiz:</p>
+        <ul class="list-disc">
+          <li>Press "S" to trigger the Submit Dialog</li>
+          <li>Press "N" for next question</li>
+          <li>Press "P" for previous question</li>
+          <li>Press "1-4" for selecting option 1 to 4</li>
+        </ul>
+      </div>
+    </div>
+    <main class="flex justify-center items-center min-h-screen relative">
+      <section class="quiz_card active" data-section="config">
+        <h2 class="text-(--surface-3) text-2xl">Define Your Quiz</h2>
+        <form
+          class="quiz_card__form gap-x-4 gap-y-4 flex flex-col justify-center w-full"
+          id="quizForm"
+        >
+          <div class="field">
+            <label for="questionCategories">Quiz category:</label>
+            <select id="questionCategories" name="questionCategories"></select>
+            <p class="error hidden" id="categoryError">
+              Failed to fetch categories, please refresh to try again
+            </p>
+          </div>
+          <div class="field">
+            <label for="questionNumber">Number of Questions:</label>
+            <input
+              id="questionNumber"
+              max="50"
+              min="10"
+              name="questionNumber"
+              type="number"
+              value="10"
+            />
+            <p class="error hidden" id="questionNumberError">
+              Please select a proper number of questions
+            </p>
+          </div>
+          <div class="field">
+            <p class="text-base">Difficulty:</p>
+            <div class="difficultyOption">
+              <input
+                id="easy"
+                name="difficultyOption"
+                type="radio"
+                value="easy"
+              />
+              <label for="easy">Easy</label>
+            </div>
+            <div class="difficultyOption">
+              <input
+                id="medium"
+                name="difficultyOption"
+                type="radio"
+                value="medium"
+              /><label for="medium">Medium</label>
+            </div>
+            <div class="difficultyOption">
+              <input
+                id="hard"
+                name="difficultyOption"
+                type="radio"
+                value="hard"
+              />
+              <label for="hard">Hard</label>
+            </div>
+
+            <p class="error hidden" id="difficultyError">
+              Please select a difficulty
+            </p>
+          </div>
+          <button
+            class="bg-(--success) py-2 px-3 rounded-lg text-white"
+            id="startQuizButton"
+            type="submit"
+          >
+            Start Quiz
+          </button>
+        </form>
+      </section>
+      <section class="quiz_card rules_box" data-section="rules">
+        <h2 class="text-(--surface-3) mb-3 text-center text-2xl">Rules</h2>
+        <div class="info_list">
+          <ol class="list-decimal flex flex-col justify-center gap-2">
+            <li>
+              <p class="info">
+                You will be given a total of
+                <span
+                  class="text-blue-400 bg-[#00000060] py-0.5 px-2"
+                  id="time-text"
+                  >3 Minutes</span
+                >
+                to attempt all questions
+              </p>
+            </li>
+            <li>
+              <p class="info">
+                Once the time exhausts its limit, the quiz will automatically be
+                ended and the result will automatically be submitted
+              </p>
+            </li>
+            <li>
+              <p class="info">
+                There will be no going back once the quiz starts
+              </p>
+            </li>
+            <li>
+              <p class="info">
+                You cannot choose more than one option at a time.
+              </p>
+            </li>
+            <li>
+              <p class="info">You'll get 1 point for each correct answer</p>
+            </li>
+            <li>
+              <p class="info">Enjoy your Quiz</p>
+            </li>
+          </ol>
+        </div>
+        <div class="buttons mt-4 flex gap-5 justify-end">
+          <button class="exit bg-(--info) rule-btn" id="exitQuiz">
+            Exit Quiz
+          </button>
+          <button class="continue bg-(--success) rule-btn" id="startQuiz">
+            Continue
+          </button>
+        </div>
+      </section>
+      <section
+        class="quiz_card quiz_box w-[60%]! max-w-none! relative p-0! m-0! rounded-3xl overflow-hidden"
+        data-section="quiz"
+      >
+        <header
+          class="flex justify-between items-center w-full bg-(--surface-2) text-white px-5"
+        >
+          <h3 class="text-xl" id="quiz_title">Quizzora</h3>
+          <div
+            class="bg-(--info) py-3 px-1.5 flex justify-center items-center gap-2 w-fit"
+          >
+            <p class="w-min">Time Left</p>
+            <p class="bg-(--surface-1) p-2 rounded-sm" id="timer"></p>
+          </div>
+        </header>
+        <div class="main_content h-3 my-4 w-[70%] min-w-60 rounded-3xl">
+          <div class="bg-(--info) h-full transition" id="progressBar"></div>
+        </div>
+        <div
+          aria-live="polite"
+          class="main_content flex flex-col justify-start question_box my-8 w-[80%] text-wrap text-left"
+        >
+          <h4
+            class="text-xl mb-4 font-(family-name:--font-question)"
+            id="questionText"
+          ></h4>
+          <div class="flex flex-col gap-5 items-center" id="optionList"></div>
+        </div>
+        <footer
+          class="flex justify-between flex-col items-center w-full text-white"
+        >
+          <div
+            class="bg-(--surface-2) px-4 md:px-12 py-3 w-full justify-between items-center"
+          >
+            <p>
+              <span id="currentQuestion"></span> of
+              <span id="totalQuestions"></span> Questions
+            </p>
+          </div>
+          <div
+            class="px-2 md:px-4 py-1 flex justify-between items-center w-full"
+          >
+            <button class="navigation_button" id="previousQuestion">
+              <span class="hidden lg:block">Previous</span>
+              <span
+                aria-label="Previous Question"
+                class="block lg:hidden"
+                data-lucide="chevron-left"
+              ></span>
+            </button>
+            <div
+              class="question_switch_buttons flex items-center max-w-[60%] gap-2 mt-2 pb-2 overflow-x-auto"
+              id="questionSwitches"
+            ></div>
+            <button class="navigation_button" id="nextQuestion">
+              <span class="hidden lg:block">Next</span>
+              <span
+                aria-label="Next Question"
+                class="block lg:hidden"
+                data-lucide="chevron-right"
+              ></span>
+            </button>
+          </div>
+          <div class="w-full flex justify-end my-3 px-2">
+            <button class="bg-(--success) rounded-2xl" id="requestSubmit">
+              Submit Quiz
+            </button>
+          </div>
+        </footer>
+      </section>
+      <section
+        class="quiz_card font-(family-name:--font-option)! results text-center"
+        data-section="results"
+      >
+        <div
+          aria-label="Result"
+          class="flex justify-center items-center"
+          id="resultIcon"
+        ></div>
+        <div class="flex flex-col justify-center items-center gap-2">
+          <h2>You've completed the Quiz</h2>
+          <p class="scoreText" id="scoreText"></p>
+          <h3 class="resultText ok" id="feedbackText"></h3>
+        </div>
+        <details class="text-left mt-3.5">
+          <summary class="cursor-pointer text-center">Answer Details</summary>
+          <ul
+            class="breakdownList flex flex-col items-center gap-3 overflow-y-auto max-h-[50vh]"
+            id="answer_breakdown"
+          ></ul>
+        </details>
+        <div
+          class="quizNavigation flex md:px-10 mt-4 justify-between items-center"
+        >
+          <button class="quizNav" id="replayQuizButton">Replay Quiz</button>
+          <button class="quizNav" id="quitQuizButton">Quit Quiz</button>
+        </div>
+      </section>
+      <div
+        class="fixed top-0 left-0 h-dvh w-full bg-(--overlay) hidden"
+        id="confirmationModal"
+      >
+        <div
+          class="flex flex-col justify-center items-center text-center absolute z-20 bg-(--primary) top-[35%] left-[50%] translate-x-[-50%] p-5 rounded-2xl gap-6"
+        >
+          <div aria-hidden="true" class="warning-icon text-(--warning)">
+            <i data-lucide="info" height="100" width="100"></i>
+          </div>
+          <div class="flex flex-col gap-2 font-(--font-option)">
+            <p class="text-xl font-bold">Are you sure you want to submit?</p>
+            <p class="text-xs opacity-80">
+              You have answered <span id="answeredQuestions"></span> out of
+              <span id="totalQuestion"></span> questions
+            </p>
+            <p class="text-xs opacity-70">This action is irreversible</p>
+          </div>
+          <div class="flex items-center gap-5 text-white">
+            <button class="bg-(--success)" id="submitQuiz">Submit Quiz</button>
+            <button class="bg-(--info)" id="resumeQuizButton">Go back</button>
+          </div>
+        </div>
+      </div>
+      <a
+        class="absolute hidden lg:flex justify-center items-center gap-2 bottom-6 left-6 text-white"
+        href="/"
+        ><span aria-hidden="true" data-lucide="arrow-left"></span>Go back
+        home</a
+      >
+    </main>
+    <script src="/src/quiz.ts" type="module"></script>
+  </body>
 </html>

@@ -7,10 +7,23 @@ import {
   createIcons,
   Crown,
   Info,
-  ThumbsUp
+  ThumbsUp,
 } from "lucide";
-import type { Breakdown, Question, QuizCategory, QuizConfig, Result, Section } from "./types";
-import { calculateTimer, decode, eventListener, handleQuizKeyboard, parseTime } from "./utils";
+import type {
+  Breakdown,
+  Question,
+  QuizCategory,
+  QuizConfig,
+  Result,
+  Section,
+} from "./types";
+import {
+  calculateTimer,
+  decode,
+  eventListener,
+  handleQuizKeyboard,
+  parseTime,
+} from "./utils";
 import { session, setSession } from "./session.ts";
 import events from "./events.ts";
 
@@ -20,8 +33,8 @@ createIcons({
     ChevronRight,
     Info,
     ArrowLeft,
-    CircleQuestionMark
-  }
+    CircleQuestionMark,
+  },
 });
 
 export class QuizSession {
@@ -34,7 +47,7 @@ export class QuizSession {
   private readonly userAnswers: Map<number, string>;
   private readonly categoryText: string;
   private readonly difficulty: string;
-  
+
   constructor(config: QuizConfig, questions: Question[]) {
     this.questions = questions;
     this.currentIndex = 0;
@@ -46,11 +59,11 @@ export class QuizSession {
     this.userAnswers = new Map();
     this.isActive = false;
   }
-  
+
   getCalculatedTime(): number {
     return this.totalTime;
   }
-  
+
   start(): void {
     this.isActive = true;
     renderNavButtons(this.questions.length, this.userAnswers);
@@ -58,19 +71,19 @@ export class QuizSession {
     addQuizKeyboardListeners();
     this.startTimer();
   }
-  
+
   pauseTimer(): void {
     this.stopTimer();
   }
-  
+
   resumeTimer(): void {
     this.startTimer();
   }
-  
+
   getCurrentOptions(): string[] {
     return this.questions[this.currentIndex].options;
   }
-  
+
   goToQuestion(index: number): void {
     if (index < 0 || index >= this.questions.length) return;
     this.currentIndex = index;
@@ -78,20 +91,20 @@ export class QuizSession {
     updateSelectionIndicatorDOM(this.currentIndex);
     updateProgressBar(this.userAnswers.size, this.questions.length);
   }
-  
+
   nextQuestion(): void {
     this.goToQuestion(this.currentIndex + 1);
   }
-  
+
   previousQuestion(): void {
     this.goToQuestion(this.currentIndex - 1);
   }
-  
+
   selectAnswer(answer: string): void {
     this.userAnswers.set(this.currentIndex, answer);
     updateAnswerIndicatorDOM(this.currentIndex, answer);
   }
-  
+
   requestSubmit(): void {
     this.pauseTimer();
     const answeredCount = this.userAnswers.size;
@@ -105,119 +118,131 @@ export class QuizSession {
       onCancel: () => {
         this.resumeTimer();
         addQuizKeyboardListeners();
-      }
+      },
     });
   }
-  
+
   private startTimer(): void {
     this.timerInterval = setInterval(() => {
       this.remainingTime--;
       updateTimerDOM(this.remainingTime);
-      
+
       if (this.remainingTime <= 0) {
         this.autoSubmit();
       }
     }, 1000);
   }
-  
+
   private stopTimer(): void {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
       this.timerInterval = null;
     }
   }
-  
+
   private submit(): Result {
     this.stopTimer();
     this.isActive = false;
     return this.compile();
   }
-  
+
   private autoSubmit(): void {
     const result = this.submit();
     renderResultsDOM(result);
   }
-  
+
   private compile(): Result {
     let score = 0;
     const breakdown: Breakdown[] = [];
-    
+
     this.questions.forEach((question, index) => {
       const userAnswer = this.userAnswers.get(index) ?? undefined;
       const isCorrect = userAnswer === question.correct_answer;
-      
+
       if (isCorrect) score++;
-      
+
       breakdown.push({
         question: question.question,
         correct: question.correct_answer,
         userAnswer,
-        isCorrect
+        isCorrect,
       });
     });
-    
+
     return {
       breakdown,
       categoryText: this.categoryText,
       difficulty: this.difficulty,
       score,
       timeTaken: this.totalTime - this.remainingTime,
-      total: this.questions.length
+      total: this.questions.length,
     };
   }
-  
+
   private renderQuestion(): void {
     const question = this.questions[this.currentIndex];
     const userAnswer = this.userAnswers.get(this.currentIndex) ?? null;
-    
+
     updateSelectionIndicatorDOM(this.currentIndex);
     updateProgressBar(this.userAnswers.size, this.questions.length);
     updateQuestionDOM(
       question,
       this.currentIndex,
       this.questions.length,
-      userAnswer
+      userAnswer,
     );
   }
 }
 
 /* DOM Element References */
 export const categoriesDropdown = document.getElementById(
-  "questionCategories"
+  "questionCategories",
 ) as HTMLSelectElement;
 export const questionNumber = document.getElementById(
-  "questionNumber"
+  "questionNumber",
 ) as HTMLInputElement;
 export const quizForm = document.getElementById("quizForm") as HTMLFormElement;
 export const startQuizButton = document.getElementById(
-  "startQuiz"
+  "startQuiz",
 ) as HTMLButtonElement;
 export const exitQuizButton = document.getElementById(
-  "exitQuiz"
+  "exitQuiz",
 ) as HTMLButtonElement;
 export const nextButton = document.getElementById(
-  "nextQuestion"
+  "nextQuestion",
 ) as HTMLButtonElement;
 export const previousButton = document.getElementById(
-  "previousQuestion"
+  "previousQuestion",
 ) as HTMLButtonElement;
 export const optionsList = document.getElementById(
-  "optionList"
+  "optionList",
 ) as HTMLDivElement;
-export const quitQuizButton = document.getElementById("quitQuizButton") as HTMLButtonElement;
-export const replayQuizButton = document.getElementById("replayQuizButton") as HTMLButtonElement;
-export const requestSubmitButton = document.getElementById("requestSubmit") as HTMLButtonElement;
+export const quitQuizButton = document.getElementById(
+  "quitQuizButton",
+) as HTMLButtonElement;
+export const replayQuizButton = document.getElementById(
+  "replayQuizButton",
+) as HTMLButtonElement;
+export const requestSubmitButton = document.getElementById(
+  "requestSubmit",
+) as HTMLButtonElement;
 const timerEl = document.getElementById("timer") as HTMLParagraphElement;
-const questionTextEl = document.getElementById("questionText") as HTMLHeadingElement;
-const questionCounterEl = document.getElementById("currentQuestion") as HTMLSpanElement;
-const totalQuestionEl = document.getElementById("totalQuestions") as HTMLSpanElement;
+const questionTextEl = document.getElementById(
+  "questionText",
+) as HTMLHeadingElement;
+const questionCounterEl = document.getElementById(
+  "currentQuestion",
+) as HTMLSpanElement;
+const totalQuestionEl = document.getElementById(
+  "totalQuestions",
+) as HTMLSpanElement;
 let navButtonEls: NodeListOf<HTMLButtonElement> | undefined;
 const hardDifficulty = document.getElementById("hard") as HTMLInputElement;
 const easyDifficulty = document.getElementById("easy") as HTMLInputElement;
 const mediumDifficulty = document.getElementById("medium") as HTMLInputElement;
 
 const quizCategoryAPIResult = await fetch(
-  `https://opentdb.com/api_category.php`
+  `https://opentdb.com/api_category.php`,
 )
   .then((data) => data.json())
   .catch(() => {
@@ -258,7 +283,7 @@ export function validateForm() {
 
 function validateNumber() {
   const questionNumberError = document.getElementById(
-    "questionNumberError"
+    "questionNumberError",
   ) as HTMLParagraphElement;
   if (
     !questionNumber.value ||
@@ -269,7 +294,7 @@ function validateNumber() {
     questionNumber.addEventListener("input", () => {
       validateNumber();
     });
-    
+
     return false;
   }
   questionNumberError.classList.add("hidden");
@@ -278,7 +303,7 @@ function validateNumber() {
 
 function validateDifficulty() {
   const questionDifficultyError = document.getElementById(
-    "difficultyError"
+    "difficultyError",
   ) as HTMLParagraphElement;
   if (
     !(
@@ -304,7 +329,7 @@ export function showSection(section: Section) {
   document.querySelectorAll("[data-section]").forEach((el) => {
     el.classList.remove("active");
   });
-  
+
   document
     .querySelector(`[data-section="${section}"]`)
     ?.classList.add("active");
@@ -333,13 +358,13 @@ function updateQuestionDOM(
   question: Question,
   currentIndex: number,
   total: number,
-  userAnswer: string | null
+  userAnswer: string | null,
 ): void {
   questionCounterEl.textContent = `${currentIndex + 1}`;
   totalQuestionEl.textContent = `${total}`;
-  
+
   questionTextEl.textContent = decode(question.question);
-  
+
   optionsList.innerHTML = "";
   question.options.forEach((option, index) => {
     const label = document.createElement("label");
@@ -356,7 +381,7 @@ function updateQuestionDOM(
     optionContainer.append(input, label);
     optionsList.appendChild(optionContainer);
   });
-  
+
   navButtonEls!.forEach((btn, index) => {
     btn.classList.toggle("active", index === currentIndex);
   });
@@ -382,13 +407,20 @@ function updateProgressBar(answered: number, total: number): void {
   progressBar!.style.width = `${(answered / total) * 100}%`;
 }
 
-function showConfirmationModal(answeredCount: number, total: number, modalOptions: {
-  onConfirm: VoidFunction,
-  onCancel: VoidFunction
-}): void {
-  document.getElementById("answeredQuestions")!.textContent = answeredCount.toString();
+function showConfirmationModal(
+  answeredCount: number,
+  total: number,
+  modalOptions: {
+    onConfirm: VoidFunction;
+    onCancel: VoidFunction;
+  },
+): void {
+  document.getElementById("answeredQuestions")!.textContent =
+    answeredCount.toString();
   document.getElementById("totalQuestion")!.textContent = total.toString();
-  const confirmationModel = document.getElementById("confirmationModal") as HTMLDivElement;
+  const confirmationModel = document.getElementById(
+    "confirmationModal",
+  ) as HTMLDivElement;
   confirmationModel.classList.remove("hidden");
   eventListener(document.getElementById("submitQuiz")!, "click", () => {
     modalOptions.onConfirm();
@@ -397,12 +429,12 @@ function showConfirmationModal(answeredCount: number, total: number, modalOption
   eventListener(document.getElementById("resumeQuizButton")!, "click", () => {
     modalOptions.onCancel();
     confirmationModel.classList.add("hidden");
-    
   });
 }
 
 function renderResultsDOM(result: Result) {
   const breakdownList = document.getElementById("answer_breakdown");
+  breakdownList!.innerHTML = "";
   result.breakdown.forEach((item, index) => {
     const li = document.createElement("li");
     if (item.isCorrect) {
@@ -415,51 +447,64 @@ function renderResultsDOM(result: Result) {
     breakdownList!.appendChild(li);
   });
   let feedback = "";
-  const resultIcon = document.querySelector("#resultIcon span") as HTMLDivElement;
+  const resultIconContainer = document.getElementById(
+    "resultIcon",
+  ) as HTMLDivElement;
+  resultIconContainer.innerHTML = "";
+  const resultIcon = document.createElement("span");
+  resultIcon.classList.add("icon");
+  resultIcon.setAttribute("height", "150");
+  resultIcon.setAttribute("width", "150");
   const feedbackText = document.getElementById("feedbackText");
   if (result.score === 0) {
     resultIcon.setAttribute("data-lucide", "circle-alert");
     resultIcon.setAttribute("color", "#FF4500");
+    resultIconContainer.appendChild(resultIcon);
+
     createIcons({
-      icons: { CircleAlert }
+      icons: { CircleAlert },
     });
     feedback = "A Poor Result! Keep practicing! You'll get better";
     feedbackText!.classList.add("notOk");
   } else if (result.score >= result.total / 2 && result.score < result.total) {
     resultIcon.setAttribute("data-lucide", "thumbs-up");
     resultIcon.setAttribute("color", "#17A589");
+    resultIconContainer.appendChild(resultIcon);
+
     createIcons({
-      icons: { ThumbsUp }
+      icons: { ThumbsUp },
     });
     feedback = "Good job! You're on the right track.";
     feedbackText!.classList.add("ok");
-    
   } else if (result.score >= 1 && result.score < result.total / 2) {
     resultIcon.setAttribute("data-lucide", "");
     resultIcon.textContent = "😢";
-    
+
     resultIcon.style.fontSize = `var(--text-4xl)`;
+    resultIconContainer.appendChild(resultIcon);
     feedback = "Keep practicing! You'll get better";
     feedbackText!.classList.add("notOk");
-    
   } else if (result.score === result.total) {
     resultIcon.setAttribute("data-lucide", "crown");
     resultIcon.setAttribute("color", "#ffc107");
+    resultIconContainer.appendChild(resultIcon);
+
     createIcons({
-      icons: { Crown }
+      icons: { Crown },
     });
     feedback = "Perfect Score! You're a genius!🎉";
     feedbackText!.classList.add("notOk");
-    
   }
-  document.getElementById("scoreText")!.textContent = `You scored ${result.score} out of ${result.total} (${Math.floor((result.score / result.total) * 100)}%)`;
+  document.getElementById("scoreText")!.textContent =
+    `You scored ${result.score} out of ${result.total} (${Math.floor((result.score / result.total) * 100)}%)`;
   document.getElementById("feedbackText")!.textContent = feedback;
   showSection("results");
 }
 
 export function exitQuiz(): void {
   setSession(null);
-  (document.getElementById("startQuizButton") as HTMLButtonElement).disabled = false;
+  (document.getElementById("startQuizButton") as HTMLButtonElement).disabled =
+    false;
   showSection("config");
 }
 
@@ -468,16 +513,9 @@ window.addEventListener("beforeunload", (e) => {
 });
 
 function addQuizKeyboardListeners(): void {
-  
-  
-  document.addEventListener("keydown", (e) => {
-    
-    handleQuizKeyboard(e);
-  });
+  document.addEventListener("keydown", handleQuizKeyboard);
 }
 
 function removeQuizKeyboardListeners(): void {
-  document.removeEventListener("keydown", (e) => {
-    handleQuizKeyboard(e);
-  });
+  document.removeEventListener("keydown", handleQuizKeyboard);
 }
