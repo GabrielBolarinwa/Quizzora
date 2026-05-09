@@ -17,7 +17,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["offline.html", "**/*.css"],
+        globPatterns: ["offline.html", "**/*.css", "quizzora.webp"],
         navigateFallback: null,
         runtimeCaching: [
           {
