@@ -1,6 +1,6 @@
 import { CircleX, createIcons, SunMoon } from "lucide";
 import type { Result, Theme } from "./types";
-import { trapFocus } from "./utils/home";
+import { trapFocus, decode } from "./utils/home";
 
 createIcons({
   icons: {
@@ -79,15 +79,15 @@ if (lastQuiz) {
   fullLastResult.classList.add("full_last_result", "animate-zoom-in");
   fullLastResult.role = "dialog";
   fullLastResult.innerHTML = `
-<button class="absolute top-3 right-3" aria-label="Close Last Result" onclick="this.parentElement.style.display = 'none'"><span data-lucide="circle-x"></span></button>
+<button class="absolute top-3 right-3 z-50" aria-label="Close Last Result" onclick="this.parentElement.style.display = 'none'"><span data-lucide="circle-x"></span></button>
   <div class="result_meta">
-<h2>${lastQuizData.categoryText} Quiz</h2>
+<h2 class="[@media(min-height:850px)]:mt-2">${lastQuizData.categoryText} Quiz</h2>
 <p>Difficulty: ${lastQuizData.difficulty}</p>
 <p>You scored ${lastQuizData.score} out of ${lastQuizData.total}</p>
 </div>
 <details class="result_breakdown" open>
 <summary>Result Breakdown</summary>
-<ul class="max-h-[50vh] overflow-y-auto">
+<ul class="max-h-[62.5vh] [@media(max-height:850px)]:max-h-[60vh] overflow-y-auto">
 </ul>
 </details>
   `;
@@ -96,7 +96,15 @@ if (lastQuiz) {
   );
   lastQuizData.breakdown.forEach((breakdown, index) => {
     let resultBreakdownListItem = document.createElement("li");
-    resultBreakdownListItem.textContent = `Question ${index + 1}: ${breakdown.isCorrect ? `Correct ✅` : `Incorrect ❌ (Correct Answer: ${breakdown.correct})`}`;
+    if (breakdown.isCorrect) {
+      resultBreakdownListItem.innerHTML = `Question ${index + 1}: Correct ✅`;
+    } else {
+      resultBreakdownListItem.innerHTML = `❌ Question ${index + 1} (${decode(breakdown.question)}):
+          <br>
+          Your answer: ${decode(breakdown.incorrect || "Unanswered")}
+          <br>
+          Correct answer: ${decode(breakdown.correct)}`;
+    }
     breakdown.isCorrect
       ? (resultBreakdownListItem.className = "correct")
       : (resultBreakdownListItem.className = "incorrect");
@@ -121,14 +129,14 @@ function displayFullResult() {
     ".full_last_result",
   ) as HTMLDivElement;
   if (fullResult) {
-    fullResult.style.display = "block";
+    fullResult.style.display = "flex";
     fullResult.focus();
     trapFocus(fullResult);
-    document.addEventListener("keydown", (e)=>{
-        if(e.key === "Escape") {
-          fullResult.style.display = "none"
-        }
-    })
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        fullResult.style.display = "none";
+      }
+    });
   }
 }
 

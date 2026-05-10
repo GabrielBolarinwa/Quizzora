@@ -23,3 +23,9 @@ export function trapFocus(modal: HTMLElement): void {
     }
   });
 }
+
+export function decode(str: string): string {
+  return (
+    new DOMParser().parseFromString(str, "text/html").body.textContent ?? str
+  );
+}

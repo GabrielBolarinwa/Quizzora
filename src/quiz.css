@@ -15,7 +15,7 @@
   }
 
   .quiz_card {
-    @apply bg-(--surface-2) p-10 rounded-xl flex-col justify-center items-center gap-4 min-w-75 w-[50%] max-w-175 shadow-lg;
+    @apply bg-(--surface-2) p-10 rounded-xl flex-col justify-center items-center gap-4 min-w-75 w-[50%] md:max-w-175 lg:max-w-125 shadow-lg;
   }
 
   .quiz_card__form .field {

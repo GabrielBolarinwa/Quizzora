@@ -165,6 +165,7 @@ export class QuizSession {
       breakdown.push({
         question: question.question,
         correct: question.correct_answer,
+        incorrect: userAnswer!,
         userAnswer,
         isCorrect,
       });
@@ -449,7 +450,12 @@ function renderResultsDOM(result: Result) {
       li.textContent = `✅ Question ${index + 1}: Correct`;
       li.className = "correct";
     } else {
-      li.textContent = `❌ Question ${index + 1} (Correct answer: ${decode(item.correct)})`;
+      li.innerHTML = `
+      ❌ Question ${index + 1} (${item.question}):
+      <br>
+      Your answer: ${decode(item.incorrect || "Unanswered")}
+      <br>
+      Correct answer: ${decode(item.correct)}`;
       li.className = "incorrect";
     }
     breakdownList!.appendChild(li);

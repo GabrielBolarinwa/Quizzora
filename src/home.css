@@ -51,7 +51,7 @@
   }
 
   .full_last_result {
-    @apply flex-col items-center justify-center fixed top-[50%] left-[50%] z-20 translate-[-50%] bg-(--surface-2) border-(--border) shadow-lg  p-5 text-center gap-4 hidden w-[80%] lg:w-[60%] rounded-2xl;
+    @apply flex-col items-center justify-center items-center fixed top-[50%] left-[50%] z-20 translate-[-50%] bg-(--surface-2) border-(--border) shadow-lg  p-5 text-center gap-4 hidden w-[80%] lg:w-[60%] rounded-2xl h-[90dvh];
   }
 
   .result_meta {
