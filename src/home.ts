@@ -78,10 +78,12 @@ if (lastQuiz) {
   let fullLastResult = document.createElement("div");
   fullLastResult.classList.add("full_last_result", "animate-zoom-in");
   fullLastResult.role = "dialog";
+  fullLastResult.ariaModal = "true";
+  fullLastResult.setAttribute("aria-labelledby", "quizText");
   fullLastResult.innerHTML = `
 <button class="absolute top-3 right-3 z-50" aria-label="Close Last Result" onclick="this.parentElement.style.display = 'none'"><span data-lucide="circle-x"></span></button>
   <div class="result_meta">
-<h2 class="[@media(min-height:850px)]:mt-2">${lastQuizData.categoryText} Quiz</h2>
+<h2 class="[@media(min-height:850px)]:mt-2" id="quizText">${lastQuizData.categoryText} Quiz</h2>
 <p>Difficulty: ${lastQuizData.difficulty}</p>
 <p>You scored ${lastQuizData.score} out of ${lastQuizData.total}</p>
 </div>
