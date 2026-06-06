@@ -216,3 +216,12 @@
     @apply bg-(image:--secondary-gradient);
   }
 }
+
+@supports (view-transition-name: none) {
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-group(root) {
+    animation-duration: 1s;
+  }
+}
