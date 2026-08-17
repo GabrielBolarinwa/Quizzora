@@ -1,19 +1,18 @@
-import {
-    ArrowLeft,
-    ChevronLeft,
-    ChevronRight,
-    CircleAlert,
-    CircleQuestionMark,
-    createIcons,
-    Crown,
-    Info,
-    ThumbsUp,
-} from "lucide";
+import {ArrowLeft, ChevronLeft, ChevronRight, CircleQuestionMark, createIcons, Info,} from "lucide";
 import type {Breakdown, Question, QuizCategory, QuizConfig, Result, Section,} from "./types";
-import {calculateTimer, decode, eventListener, handleQuizKeyboard, parseTime,} from "./utils";
+import {calculateTimer, handleQuizKeyboard, parseTime,} from "./utils/quiz.ts";
 import {session, setSession} from "./session.ts";
 import events from "./events.ts";
-import {trapFocus} from "./utils/home.ts";
+import {
+    renderNavButtons,
+    renderResultsDOM,
+    showConfirmationModal,
+    updateAnswerIndicatorDOM,
+    updateProgressBar,
+    updateQuestionDOM,
+    updateSelectionIndicatorDOM,
+    updateTimerDOM
+} from "./render.ts";
 
 createIcons({
     icons: {
@@ -113,7 +112,7 @@ export class QuizSession {
     private startTimer(): void {
         this.timerInterval = setInterval(() => {
             this.remainingTime--;
-            updateTimerDOM(this.remainingTime);
+            updateTimerDOM(this.remainingTime, timerEl);
             
             if (this.remainingTime <= 0) {
                 this.autoSubmit();
@@ -153,7 +152,7 @@ export class QuizSession {
             breakdown.push({
                 question: question.question,
                 correct: question.correct_answer,
-                incorrect: userAnswer!,
+                incorrect: userAnswer || "",
                 userAnswer,
                 isCorrect,
             });
@@ -180,6 +179,9 @@ export class QuizSession {
             this.currentIndex,
             this.questions.length,
             userAnswer,
+            questionCounterEl,
+            totalQuestionEl,
+            questionTextEl
         );
     }
 }
@@ -226,7 +228,6 @@ const questionCounterEl = document.getElementById(
 const totalQuestionEl = document.getElementById(
     "totalQuestions",
 ) as HTMLSpanElement;
-let navButtonEls: NodeListOf<HTMLButtonElement> | undefined;
 const hardDifficulty = document.getElementById("hard") as HTMLInputElement;
 const easyDifficulty = document.getElementById("easy") as HTMLInputElement;
 const mediumDifficulty = document.getElementById("medium") as HTMLInputElement;
@@ -323,184 +324,6 @@ export function showSection(section: Section) {
     document
         .querySelector(`[data-section="${section}"]`)
         ?.classList.add("active");
-}
-
-function renderNavButtons(total: number, userAnswers: Map<number, string>) {
-    const questionSwitchContainer = document.getElementById("questionSwitches");
-    if (questionSwitchContainer) questionSwitchContainer.innerHTML = "";
-    for (let i = 0; i < total; i++) {
-        const btn = document.createElement("button");
-        btn.textContent = `${i + 1}`;
-        btn.classList.toggle("answered", userAnswers.has(i));
-        btn.addEventListener("click", () => session?.goToQuestion(i));
-        btn.classList.add("navigation_button");
-        questionSwitchContainer?.appendChild(btn);
-    }
-    navButtonEls = questionSwitchContainer?.querySelectorAll("button");
-}
-
-function updateTimerDOM(remainingTime: number): void {
-    const {minutes, seconds} = parseTime(remainingTime);
-    timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
-function updateQuestionDOM(
-    question: Question,
-    currentIndex: number,
-    total: number,
-    userAnswer: string | null,
-): void {
-    questionCounterEl.textContent = `${currentIndex + 1}`;
-    totalQuestionEl.textContent = `${total}`;
-    
-    questionTextEl.textContent = decode(question.question);
-    
-    optionsList.innerHTML = "";
-    question.options.forEach((option, index) => {
-        const label = document.createElement("label");
-        const input = document.createElement("input");
-        const optionContainer = document.createElement("li");
-        input.type = "radio";
-        input.name = "quiz-option";
-        input.value = option;
-        input.id = `option-${index + 1}`;
-        input.checked = userAnswer === option;
-        label.htmlFor = `option-${index + 1}`;
-        label.appendChild(document.createTextNode(decode(option)));
-        optionContainer.classList.add("option");
-        optionContainer.append(input, label);
-        optionsList.appendChild(optionContainer);
-    });
-    
-    navButtonEls!.forEach((btn, index) => {
-        btn.classList.toggle("active", index === currentIndex);
-    });
-}
-
-function updateAnswerIndicatorDOM(index: number, answer: string | null): void {
-    const btn = navButtonEls![index];
-    if (!btn) return;
-    btn.classList.toggle("answered", answer !== null);
-}
-
-function updateSelectionIndicatorDOM(index: number): void {
-    const btn = navButtonEls![index];
-    if (!btn) return;
-    navButtonEls!.forEach((btn) => {
-        btn.classList.remove("selected");
-    });
-    btn.classList.add("selected");
-}
-
-function updateProgressBar(answered: number, total: number): void {
-    const progressBar = document.getElementById("progressBar");
-    progressBar!.style.width = `${(answered / total) * 100}%`;
-}
-
-function showConfirmationModal(
-    answeredCount: number,
-    total: number,
-    modalOptions: {
-        onConfirm: VoidFunction;
-        onCancel: VoidFunction;
-    },
-): void {
-    document.getElementById("answeredQuestions")!.textContent =
-        answeredCount.toString();
-    document.getElementById("totalQuestion")!.textContent = total.toString();
-    const confirmationModal = document.getElementById(
-        "confirmationModal",
-    ) as HTMLDivElement;
-    confirmationModal.classList.remove("hidden");
-    trapFocus(confirmationModal);
-    eventListener(document.getElementById("submitQuiz")!, "click", () => {
-        modalOptions.onConfirm();
-        confirmationModal.classList.add("hidden");
-    });
-    eventListener(document.getElementById("resumeQuizButton")!, "click", () => {
-        modalOptions.onCancel();
-        confirmationModal.classList.add("hidden");
-    });
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            confirmationModal.classList.add("hidden");
-            modalOptions.onCancel();
-        }
-    });
-}
-
-function renderResultsDOM(result: Result) {
-    const breakdownList = document.getElementById("answer_breakdown");
-    breakdownList!.innerHTML = "";
-    result.breakdown.forEach((item, index) => {
-        const li = document.createElement("li");
-        if (item.isCorrect) {
-            li.textContent = `✅ Question ${index + 1}: Correct`;
-            li.className = "correct";
-        } else {
-            li.innerHTML = `
-      ❌ Question ${index + 1} (${item.question}):
-      <br>
-      Your answer: ${decode(item.incorrect || "Unanswered")}
-      <br>
-      Correct answer: ${decode(item.correct)}`;
-            li.className = "incorrect";
-        }
-        breakdownList!.appendChild(li);
-    });
-    let feedback = "";
-    const resultIconContainer = document.getElementById(
-        "resultIcon",
-    ) as HTMLDivElement;
-    resultIconContainer.innerHTML = "";
-    const resultIcon = document.createElement("span");
-    resultIcon.classList.add("icon");
-    resultIcon.setAttribute("height", "150");
-    resultIcon.setAttribute("width", "150");
-    const feedbackText = document.getElementById("feedbackText");
-    if (result.score === 0) {
-        resultIcon.setAttribute("data-lucide", "circle-alert");
-        resultIcon.setAttribute("color", "#FF4500");
-        resultIconContainer.appendChild(resultIcon);
-        
-        createIcons({
-            icons: {CircleAlert},
-        });
-        feedback = "A Poor Result! Keep practicing! You'll get better";
-        feedbackText!.classList.add("notOk");
-    } else if (result.score >= result.total / 2 && result.score < result.total) {
-        resultIcon.setAttribute("data-lucide", "thumbs-up");
-        resultIcon.setAttribute("color", "#17A589");
-        resultIconContainer.appendChild(resultIcon);
-        
-        createIcons({
-            icons: {ThumbsUp},
-        });
-        feedback = "Good job! You're on the right track.";
-        feedbackText!.classList.add("ok");
-    } else if (result.score >= 1 && result.score < result.total / 2) {
-        resultIcon.setAttribute("data-lucide", "");
-        resultIcon.textContent = "😢";
-        
-        resultIcon.style.fontSize = `var(--text-4xl)`;
-        resultIconContainer.appendChild(resultIcon);
-        feedback = "Keep practicing! You'll get better";
-        feedbackText!.classList.add("notOk");
-    } else if (result.score === result.total) {
-        resultIcon.setAttribute("data-lucide", "crown");
-        resultIcon.setAttribute("color", "#ffc107");
-        resultIconContainer.appendChild(resultIcon);
-        
-        createIcons({
-            icons: {Crown},
-        });
-        feedback = "Perfect Score! You're a genius!🎉";
-        feedbackText!.classList.add("ok");
-    }
-    document.getElementById("scoreText")!.textContent =
-        `You scored ${result.score} out of ${result.total} (${Math.floor((result.score / result.total) * 100)}%)`;
-    document.getElementById("feedbackText")!.textContent = feedback;
-    showSection("results");
 }
 
 export function exitQuiz(): void {

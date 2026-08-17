@@ -1,24 +1,24 @@
 import {
-  categoriesDropdown,
-  exitQuiz,
-  exitQuizButton,
-  nextButton,
-  optionsList,
-  previousButton,
-  questionNumber,
-  quitQuizButton,
-  quizForm,
-  QuizSession,
-  renderRulesTimer,
-  replayQuizButton,
-  requestSubmitButton,
-  showSection,
-  startQuizButton,
-  validateForm,
+    categoriesDropdown,
+    exitQuiz,
+    exitQuizButton,
+    nextButton,
+    optionsList,
+    previousButton,
+    questionNumber,
+    quitQuizButton,
+    quizForm,
+    QuizSession,
+    renderRulesTimer,
+    replayQuizButton,
+    requestSubmitButton,
+    showSection,
+    startQuizButton,
+    validateForm,
 } from "./quiz.ts";
 import type {Difficulty, Question, QuizConfig, RawQuestion} from "./types";
 import {session, setSession} from "./session.ts";
-import {eventListener, shuffle} from "./utils";
+import {eventListener, shuffle} from "./utils/quiz.ts";
 
 export default function events(): void {
     eventListener(quizForm, "submit", async (e) => {
