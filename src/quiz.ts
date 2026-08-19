@@ -1,8 +1,6 @@
-import {ArrowLeft, ChevronLeft, ChevronRight, CircleQuestionMark, createIcons, Info,} from "lucide";
-import type {Breakdown, Question, QuizCategory, QuizConfig, Result, Section,} from "./types";
-import {calculateTimer, handleQuizKeyboard, parseTime,} from "./utils/quiz.ts";
-import {session, setSession} from "./session.ts";
-import events from "./events.ts";
+import type {Breakdown, Question, QuizConfig, Result,} from "./types";
+import {calculateTimer,} from "./utils/quiz.ts";
+import {addQuizKeyboardListeners, removeQuizKeyboardListeners} from "./events.ts";
 import {
     renderNavButtons,
     renderResultsDOM,
@@ -13,16 +11,7 @@ import {
     updateSelectionIndicatorDOM,
     updateTimerDOM
 } from "./render.ts";
-
-createIcons({
-    icons: {
-        ChevronLeft,
-        ChevronRight,
-        Info,
-        ArrowLeft,
-        CircleQuestionMark,
-    },
-});
+import {questionCounterEl, questionTextEl, timerEl, totalQuestionEl} from "./dom.ts";
 
 export class QuizSession {
     isActive: boolean;
@@ -184,163 +173,4 @@ export class QuizSession {
             questionTextEl
         );
     }
-}
-
-/* DOM Element References */
-export const categoriesDropdown = document.getElementById(
-    "questionCategories",
-) as HTMLSelectElement;
-export const questionNumber = document.getElementById(
-    "questionNumber",
-) as HTMLInputElement;
-export const quizForm = document.getElementById("quizForm") as HTMLFormElement;
-export const startQuizButton = document.getElementById(
-    "startQuiz",
-) as HTMLButtonElement;
-export const exitQuizButton = document.getElementById(
-    "exitQuiz",
-) as HTMLButtonElement;
-export const nextButton = document.getElementById(
-    "nextQuestion",
-) as HTMLButtonElement;
-export const previousButton = document.getElementById(
-    "previousQuestion",
-) as HTMLButtonElement;
-export const optionsList = document.getElementById(
-    "optionList",
-) as HTMLDivElement;
-export const quitQuizButton = document.getElementById(
-    "quitQuizButton",
-) as HTMLButtonElement;
-export const replayQuizButton = document.getElementById(
-    "replayQuizButton",
-) as HTMLButtonElement;
-export const requestSubmitButton = document.getElementById(
-    "requestSubmit",
-) as HTMLButtonElement;
-const timerEl = document.getElementById("timer") as HTMLParagraphElement;
-const questionTextEl = document.getElementById(
-    "questionText",
-) as HTMLHeadingElement;
-const questionCounterEl = document.getElementById(
-    "currentQuestion",
-) as HTMLSpanElement;
-const totalQuestionEl = document.getElementById(
-    "totalQuestions",
-) as HTMLSpanElement;
-const hardDifficulty = document.getElementById("hard") as HTMLInputElement;
-const easyDifficulty = document.getElementById("easy") as HTMLInputElement;
-const mediumDifficulty = document.getElementById("medium") as HTMLInputElement;
-
-const quizCategoryAPIResult = await fetch(
-    `https://opentdb.com/api_category.php`,
-)
-    .then((data) => data.json())
-    .catch(() => {
-        document.getElementById("categoryError")?.classList.remove("hidden");
-        quizForm.onsubmit = (e: Event) => {
-            e.preventDefault();
-            e.stopPropagation();
-        };
-    });
-
-const quizCategories: QuizCategory[] = quizCategoryAPIResult.trivia_categories ?? [];
-
-quizCategories.forEach((quizCategory) => {
-    let option = document.createElement("option");
-    option.value = quizCategory.id.toString();
-    option.textContent = quizCategory.name;
-    categoriesDropdown.appendChild(option);
-});
-
-const params = new URLSearchParams(window.location.search);
-const category = params.get("category");
-if (category) {
-    Array.from(categoriesDropdown.options).forEach((option) => {
-        if (option.value === category) {
-            option.selected = true;
-        }
-    });
-}
-
-events();
-
-export function validateForm() {
-    document.querySelectorAll(".difficultyOption").forEach((option) => {
-        option.addEventListener("change", () => validateDifficulty());
-    });
-    return Promise.all([validateNumber(), validateDifficulty()]);
-}
-
-function validateNumber() {
-    const questionNumberError = document.getElementById(
-        "questionNumberError",
-    ) as HTMLParagraphElement;
-    if (
-        !questionNumber.value ||
-        Number(questionNumber.value) > 50 ||
-        Number(questionNumber.value) < 10
-    ) {
-        questionNumberError.classList.remove("hidden");
-        questionNumber.addEventListener("input", () => {
-            validateNumber();
-        });
-        
-        return false;
-    }
-    questionNumberError.classList.add("hidden");
-    return true;
-}
-
-function validateDifficulty() {
-    const questionDifficultyError = document.getElementById(
-        "difficultyError",
-    ) as HTMLParagraphElement;
-    if (
-        !(
-            hardDifficulty.checked ||
-            mediumDifficulty.checked ||
-            easyDifficulty.checked
-        )
-    ) {
-        questionDifficultyError.classList.remove("hidden");
-        return false;
-    }
-    questionDifficultyError.classList.add("hidden");
-    return true;
-}
-
-export function renderRulesTimer(totalTime: number) {
-    const timeText = document.getElementById("time-text") as HTMLSpanElement;
-    const {minutes} = parseTime(totalTime);
-    if (timeText) timeText.textContent = `${minutes} minutes`;
-}
-
-export function showSection(section: Section) {
-    document.querySelectorAll("[data-section]").forEach((el) => {
-        el.classList.remove("active");
-    });
-    
-    document
-        .querySelector(`[data-section="${section}"]`)
-        ?.classList.add("active");
-}
-
-export function exitQuiz(): void {
-    setSession(null);
-    (document.getElementById("startQuizButton") as HTMLButtonElement).disabled =
-        false;
-    showSection("config");
-}
-
-window.addEventListener("beforeunload", (e) => {
-    if (session?.isActive) e.preventDefault();
-});
-
-function addQuizKeyboardListeners(): void {
-    document.addEventListener("keydown", handleQuizKeyboard);
-}
-
-function removeQuizKeyboardListeners(): void {
-    document.removeEventListener("keydown", handleQuizKeyboard);
 }

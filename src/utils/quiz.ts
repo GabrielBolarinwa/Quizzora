@@ -1,6 +1,4 @@
 import type {Difficulty, ParsedTime} from "../types";
-import {session} from "../session.ts";
-import {optionsList} from "../quiz.ts";
 
 export const shuffle = <T>(arr: T[]): T[] => {
     const copy = [...arr];
@@ -54,36 +52,6 @@ export function decode(str: string): string {
     );
 }
 
-export function handleQuizKeyboard(e: KeyboardEvent) {
-    if (!session?.isActive) return;
-    
-    switch (e.key.toUpperCase()) {
-        case "N":
-            session.nextQuestion();
-            break;
-        case "P":
-            session.previousQuestion();
-            break;
-        case "S":
-            session.requestSubmit();
-            break;
-        case "1":
-        case "2":
-        case "3":
-        case "4":
-            const index = Number(e.key) - 1;
-            const options = session.getCurrentOptions();
-            if (options[index]) {
-                session.selectAnswer(options[index]);
-                const radios = optionsList.querySelectorAll<HTMLInputElement>(
-                    'input[type="radio"]',
-                );
-                if (radios[index]) radios[index].checked = true;
-            }
-            break;
-    }
-}
-
 export function trapFocus(modal: HTMLElement): void {
     const focusable = modal.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
@@ -108,4 +76,26 @@ export function trapFocus(modal: HTMLElement): void {
             }
         }
     });
+}
+
+export function resolveAPIError(response_code: number): string {
+    switch (response_code) {
+        case 1:
+            return "Not enough questions for the selected category please select another category or reduce number of questions"
+        case 2:
+            return "Internal application error, please contact the developer"
+        default:
+            return "An unknown error occurred"
+    }
+}
+
+export async function fetchWithRetry<T>(url: string, retries: number = 1): Promise<T> {
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to load quiz data, please check your internet connection`)
+        return await res.json() as T
+    } catch (err) {
+        if (retries > 0) return fetchWithRetry<T>(url, retries - 1);
+        throw err
+    }
 }

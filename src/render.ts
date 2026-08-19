@@ -1,9 +1,29 @@
-import type {Question, Result} from "./types";
+import type {Question, QuizCategory, Result} from "./types";
 import {decode, eventListener, parseTime, trapFocus} from "./utils/quiz.ts";
-import {CircleAlert, createIcons, Crown, ThumbsUp} from "lucide";
-import {optionsList, showSection} from "./quiz.ts";
+import {
+    ArrowLeft,
+    ChevronLeft,
+    ChevronRight,
+    CircleAlert,
+    CircleQuestionMark,
+    createIcons,
+    Crown,
+    Info,
+    ThumbsUp
+} from "lucide";
 import {session} from "./session.ts";
+import {categoriesDropdown, optionsList, quizFetchError} from "./dom.ts";
+import {showSection} from "./events.ts";
 
+createIcons({
+    icons: {
+        ChevronLeft,
+        ChevronRight,
+        Info,
+        ArrowLeft,
+        CircleQuestionMark,
+    },
+});
 
 let navButtonEls: NodeListOf<HTMLButtonElement>;
 
@@ -189,4 +209,18 @@ export function showConfirmationModal(
             modalOptions.onCancel();
         }
     });
+}
+
+export function renderCategories(quizCategories: QuizCategory[]) {
+    quizCategories.forEach((quizCategory) => {
+        let option = document.createElement("option");
+        option.value = quizCategory.id.toString();
+        option.textContent = quizCategory.name;
+        categoriesDropdown.appendChild(option);
+    });
+}
+
+export function populateQuizFetchError(error: string) {
+    quizFetchError.classList.remove("hidden")
+    quizFetchError.textContent = error
 }

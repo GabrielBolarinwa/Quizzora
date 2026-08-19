@@ -22,7 +22,7 @@
         @apply flex flex-col justify-center p-0 gap-2;
     }
 
-    .field .error {
+    .error {
         @apply text-(--error) text-xs;
     }
 
